@@ -6,5 +6,5 @@ Messaging
 
 
 - Dennis
-  bis 14.5 die ersten 3-4 Messageing Klassen
+  bis 14.5 die ersten 3-4 Messageing Klassen, 
   TrelloBoard?!
