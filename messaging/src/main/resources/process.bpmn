@@ -335,7 +335,7 @@
     <bpmn:endEvent id="Event_17hnkak" name="Sendung abgebrochen">
       <bpmn:incoming>Flow_0u13lec</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:exclusiveGateway id="Gateway_122k0w5">
+    <bpmn:exclusiveGateway id="Gateway_122k0w5" default="Flow_0y1jdy0">
       <bpmn:incoming>Flow_16mks0s</bpmn:incoming>
       <bpmn:incoming>Flow_1eprow5</bpmn:incoming>
       <bpmn:outgoing>Flow_0y1jdy0</bpmn:outgoing>
@@ -368,7 +368,7 @@
     <bpmn:sequenceFlow id="Flow_16mks0s" sourceRef="Activity_0xdh5pt" targetRef="Gateway_122k0w5" />
     <bpmn:sequenceFlow id="Flow_0qnjylk" sourceRef="Event_01f7889" targetRef="Activity_1advutg" />
     <bpmn:sequenceFlow id="Flow_1eprow5" sourceRef="Activity_1advutg" targetRef="Gateway_122k0w5" />
-    <bpmn:userTask id="Activity_1advutg" name="Paket anmelden">
+    <bpmn:userTask id="Activity_1advutg" name="Paket anmelden" camunda:assignee="fozzie">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="username" label="Username" type="string">
@@ -424,9 +424,7 @@
     <bpmn:sequenceFlow id="Flow_1x8vxkt" name="nein" sourceRef="Gateway_1wzznob" targetRef="Event_1bbd4eg">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1r641xs" name="nein" sourceRef="Gateway_13onwop" targetRef="Event_0svhn2r">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1r641xs" name="nein" sourceRef="Gateway_13onwop" targetRef="Event_0svhn2r" />
     <bpmn:endEvent id="Event_0svhn2r" name="Anmeldedaten nicht gefunden">
       <bpmn:incoming>Flow_1r641xs</bpmn:incoming>
     </bpmn:endEvent>
