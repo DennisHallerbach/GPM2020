@@ -69,5 +69,11 @@ private static final long serialVersionUID = 1L;
 	public void setPacketWeight(long packetWeight) {
 		this.packetWeight = packetWeight;
 	}
+	public int getOrderid() {
+		return orderid;
+	}
+	public void setOrderid(int orderid) {
+		this.orderid = orderid;
+	}
 	
 }
