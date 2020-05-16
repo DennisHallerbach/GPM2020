@@ -20,6 +20,7 @@ public class NewDroneRequestMessage implements JavaDelegate {
 		Long packetWidth = (Long) execution.getVariable("packetWidth");
 		Long packetHeight = (Long) execution.getVariable("packetHeight");
 		Long packetWeight = (Long) execution.getVariable("packetWeight");
+		String processId = (String) execution.getVariable("processId");
 		Map<String, Object> data = new HashMap<String,Object>();
 		data.put("username", Username);
 		data.put("password", Password);
@@ -27,6 +28,7 @@ public class NewDroneRequestMessage implements JavaDelegate {
 		data.put("packetWidth", packetWidth);
 		data.put("packetHeight", packetHeight);
 		data.put("packetWeight", packetWeight);
+		data.put("userProcessId",processId);
 		RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
         MessageCorrelationResult mcresult = runtimeService.createMessageCorrelation("NewDroneRequestMessage")
                                                             .setVariables(data)
