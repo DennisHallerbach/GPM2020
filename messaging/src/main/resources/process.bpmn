@@ -44,8 +44,6 @@
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:sequenceFlow id="Flow_1m0f6cw" sourceRef="Event_0uvbke1" targetRef="Event_0hwikbb" />
-    <bpmn:sequenceFlow id="Flow_0hrdu3d" sourceRef="Event_02c57pf" targetRef="Activity_114isci" />
-    <bpmn:sequenceFlow id="Flow_00lrwg2" sourceRef="Activity_114isci" targetRef="Gateway_14eej3b" />
     <bpmn:sequenceFlow id="Flow_01pb65p" name="Anmeldedaten falsch" sourceRef="Gateway_14eej3b" targetRef="Event_1asgp7v" />
     <bpmn:sequenceFlow id="Flow_0zlxr7x" name="Anmeldedaten nicht gefunden" sourceRef="Gateway_14eej3b" targetRef="Event_0x4gd5z" />
     <bpmn:sequenceFlow id="Flow_1m9gbds" name="Anmeldedaten korrekt" sourceRef="Gateway_14eej3b" targetRef="Activity_0ys2714" />
@@ -144,8 +142,13 @@
       <bpmn:outgoing>Flow_1lyltoe</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:callActivity id="Activity_114isci" name="Anmeldedaten überprüfen" calledElement="AnmeldedatenPruefen">
-      <bpmn:incoming>Flow_0hrdu3d</bpmn:incoming>
-      <bpmn:outgoing>Flow_00lrwg2</bpmn:outgoing>
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out source="order" target="order" />
+        <camunda:out source="verified" target="verified" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_02afxiu</bpmn:incoming>
+      <bpmn:outgoing>Flow_16t2p7g</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:endEvent id="Event_0hwikbb" name="Lieferung abgebrochen">
       <bpmn:incoming>Flow_1m0f6cw</bpmn:incoming>
@@ -208,15 +211,17 @@
       <bpmn:outgoing>Flow_0ykfnsb</bpmn:outgoing>
     </bpmn:businessRuleTask>
     <bpmn:inclusiveGateway id="Gateway_14eej3b">
-      <bpmn:incoming>Flow_00lrwg2</bpmn:incoming>
+      <bpmn:incoming>Flow_16t2p7g</bpmn:incoming>
       <bpmn:outgoing>Flow_01pb65p</bpmn:outgoing>
       <bpmn:outgoing>Flow_0zlxr7x</bpmn:outgoing>
       <bpmn:outgoing>Flow_1m9gbds</bpmn:outgoing>
     </bpmn:inclusiveGateway>
     <bpmn:startEvent id="Event_02c57pf" name="Anfrage empfangen">
-      <bpmn:outgoing>Flow_0hrdu3d</bpmn:outgoing>
+      <bpmn:outgoing>Flow_02afxiu</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_15vsfpx" messageRef="Message_09pdup0" />
     </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_02afxiu" sourceRef="Event_02c57pf" targetRef="Activity_114isci" />
+    <bpmn:sequenceFlow id="Flow_16t2p7g" sourceRef="Activity_114isci" targetRef="Gateway_14eej3b" />
   </bpmn:process>
   <bpmn:process id="PaketVersenden" name="Paket versenden" isExecutable="true">
     <bpmn:laneSet id="LaneSet_05mruuv">
@@ -410,21 +415,22 @@
   <bpmn:process id="AnmeldedatenPruefen" name="Anmeldedaten prüfen" isExecutable="true">
     <bpmn:laneSet id="LaneSet_0c39oiq" />
     <bpmn:startEvent id="Event_15gla80">
-      <bpmn:outgoing>Flow_1o4w6mg</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1549mzg</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_1o4w6mg" sourceRef="Event_15gla80" targetRef="Activity_14d3opo" />
     <bpmn:sequenceFlow id="Flow_1nxlhr3" sourceRef="Activity_14d3opo" targetRef="Gateway_13onwop" />
     <bpmn:sequenceFlow id="Flow_1c7birj" name="ja" sourceRef="Gateway_13onwop" targetRef="Activity_1vlpuiy">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${gotCredentials}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0n4til2" sourceRef="Activity_1vlpuiy" targetRef="Gateway_1wzznob" />
     <bpmn:sequenceFlow id="Flow_1ddxy8z" name="ja" sourceRef="Gateway_1wzznob" targetRef="Event_04has72">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${verified}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1x8vxkt" name="nein" sourceRef="Gateway_1wzznob" targetRef="Event_1bbd4eg">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${verified}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1r641xs" name="nein" sourceRef="Gateway_13onwop" targetRef="Event_0svhn2r" />
+    <bpmn:sequenceFlow id="Flow_1r641xs" name="nein" sourceRef="Gateway_13onwop" targetRef="Event_0svhn2r">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${gotCredentials}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:endEvent id="Event_0svhn2r" name="Anmeldedaten nicht gefunden">
       <bpmn:incoming>Flow_1r641xs</bpmn:incoming>
     </bpmn:endEvent>
@@ -449,9 +455,10 @@
       <bpmn:outgoing>Flow_1r641xs</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:serviceTask id="Activity_14d3opo" name="Anmeldedaten holen" camunda:class="edu.thi.flytransport.messaging.servicetask.GetCredentialsTask">
-      <bpmn:incoming>Flow_1o4w6mg</bpmn:incoming>
+      <bpmn:incoming>Flow_1549mzg</bpmn:incoming>
       <bpmn:outgoing>Flow_1nxlhr3</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1549mzg" sourceRef="Event_15gla80" targetRef="Activity_14d3opo" />
   </bpmn:process>
   <bpmn:process id="Payment" name="Payment" isExecutable="true">
     <bpmn:startEvent id="Event_0mevnbe">
@@ -640,18 +647,18 @@
           <dc:Bounds x="624" y="721" width="71" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_00lrwg2_di" bpmnElement="Flow_00lrwg2">
-        <di:waypoint x="610" y="670" />
-        <di:waypoint x="675" y="670" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0hrdu3d_di" bpmnElement="Flow_0hrdu3d">
-        <di:waypoint x="458" y="670" />
-        <di:waypoint x="510" y="670" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1m0f6cw_di" bpmnElement="Flow_1m0f6cw">
         <di:waypoint x="2398" y="480" />
         <di:waypoint x="2410" y="480" />
         <di:waypoint x="2410" y="602" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02afxiu_di" bpmnElement="Flow_02afxiu">
+        <di:waypoint x="458" y="670" />
+        <di:waypoint x="510" y="670" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16t2p7g_di" bpmnElement="Flow_16t2p7g">
+        <di:waypoint x="610" y="670" />
+        <di:waypoint x="675" y="670" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_0hl29qi_di" bpmnElement="Activity_0hl29qi" isExpanded="true">
         <dc:Bounds x="1560" y="120" width="820" height="410" />
@@ -848,7 +855,7 @@
       <bpmndi:BPMNShape id="Event_02c57pf_di" bpmnElement="Event_02c57pf">
         <dc:Bounds x="422" y="652" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="413" y="622" width="55" height="27" />
+          <dc:Bounds x="412" y="697.5" width="55" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0uvbke1_di" bpmnElement="Event_0uvbke1">
@@ -1102,7 +1109,7 @@
         <di:waypoint x="480" y="1840" />
         <di:waypoint x="535" y="1840" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1o4w6mg_di" bpmnElement="Flow_1o4w6mg">
+      <bpmndi:BPMNEdge id="Flow_1549mzg_di" bpmnElement="Flow_1549mzg">
         <di:waypoint x="328" y="1840" />
         <di:waypoint x="380" y="1840" />
       </bpmndi:BPMNEdge>
