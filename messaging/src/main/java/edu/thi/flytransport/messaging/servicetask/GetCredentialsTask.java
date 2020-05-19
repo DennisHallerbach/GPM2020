@@ -3,10 +3,6 @@ package edu.thi.flytransport.messaging.servicetask;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/DennisHallerbach/GPM2020.git
 
 import edu.thi.flytransport.messaging.beans.Order;
 
