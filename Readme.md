@@ -12,3 +12,13 @@
 - Prozessentwurf 
 - bis 14.5 die ersten 3-4 Messageing Klassen, 
 - TrelloBoard?!
+
+
+## Notizen Meeting 25.05
+- Prozesse auslagern in eigene Dateien
+- Top down Best Practice durchsetzen
+- Allgemein noch zu wenig Schritte
+- Mehr Herachie reinbringen
+- Ordnung in BpMN prozesse
+- Substantivierung in Unterprozessen
+- Mehr Vielfalt!!!
