@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1talw1c" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.0.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1talw1c" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.0.0">
   <bpmn:collaboration id="Collaboration_0tn7g90">
     <bpmn:participant id="Participant_1shj889" name="Zulassungskontrolle" processRef="Zulassungskontrolle" />
     <bpmn:participant id="Participant_01olm2w" name="User" />
@@ -8,17 +8,29 @@
   </bpmn:collaboration>
   <bpmn:process id="Zulassungskontrolle" name="Zulassungskontrolle" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;DocumentOK&#39;,false)}" event="start" />
+      </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0ux04sk</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sendTask id="Activity_0c4bpd9" name="Zulassungsdokument anfordern">
+    <bpmn:sendTask id="Activity_0c4bpd9" name="Zulassungsdokument anfordern" camunda:class="edu.thi.flytransport.messaging.servicetask.RequestDocumentMessage">
       <bpmn:incoming>Flow_0ux04sk</bpmn:incoming>
       <bpmn:outgoing>Flow_0jrpn74</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:receiveTask id="Activity_15x9jt4" name="Zulassungsdokument erhalten">
+    <bpmn:receiveTask id="Activity_15x9jt4" name="Zulassungsdokument erhalten" messageRef="Message_0v6nv71">
       <bpmn:incoming>Flow_0jrpn74</bpmn:incoming>
       <bpmn:outgoing>Flow_0rnuj6d</bpmn:outgoing>
     </bpmn:receiveTask>
     <bpmn:userTask id="Activity_0k3eo9o" name="Zulassung genehmigen">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="documentApproved" label="Zulassung ok?" type="boolean" defaultValue="false">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0rnuj6d</bpmn:incoming>
       <bpmn:outgoing>Flow_0xshy49</bpmn:outgoing>
     </bpmn:userTask>
@@ -28,6 +40,9 @@
       <bpmn:outgoing>Flow_13puvyz</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:endEvent id="Event_0mb61g4" name="Zulassung ok">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;DocumentOK&#39;,true)}" event="start" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_13puvyz</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:boundaryEvent id="Event_1fle62u" name="Warte 10 Minuten" attachedToRef="Activity_15x9jt4">
@@ -40,8 +55,12 @@
     <bpmn:sequenceFlow id="Flow_0rnuj6d" sourceRef="Activity_15x9jt4" targetRef="Activity_0k3eo9o" />
     <bpmn:sequenceFlow id="Flow_1ripp8f" sourceRef="Event_1fle62u" targetRef="Event_0enozmb" />
     <bpmn:sequenceFlow id="Flow_0xshy49" sourceRef="Activity_0k3eo9o" targetRef="Gateway_00x70vt" />
-    <bpmn:sequenceFlow id="Flow_0dzexq5" name="nein" sourceRef="Gateway_00x70vt" targetRef="Event_1645m3f" />
-    <bpmn:sequenceFlow id="Flow_13puvyz" name="ja" sourceRef="Gateway_00x70vt" targetRef="Event_0mb61g4" />
+    <bpmn:sequenceFlow id="Flow_0dzexq5" name="nein" sourceRef="Gateway_00x70vt" targetRef="Event_1645m3f">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!documentApproved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_13puvyz" name="ja" sourceRef="Gateway_00x70vt" targetRef="Event_0mb61g4">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!documentApproved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0ux04sk" sourceRef="StartEvent_1" targetRef="Activity_0c4bpd9" />
     <bpmn:endEvent id="Event_1645m3f" name="Zulassung nicht ok">
       <bpmn:incoming>Flow_0dzexq5</bpmn:incoming>
@@ -51,35 +70,15 @@
       <bpmn:terminateEventDefinition id="TerminateEventDefinition_0d1779j" />
     </bpmn:endEvent>
   </bpmn:process>
+  <bpmn:message id="Message_0v6nv71" name="DocumentMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0tn7g90">
       <bpmndi:BPMNShape id="Participant_1shj889_di" bpmnElement="Participant_1shj889" isHorizontal="true">
         <dc:Bounds x="129" y="85" width="851" height="325" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_0jrpn74_di" bpmnElement="Flow_0jrpn74">
-        <di:waypoint x="380" y="177" />
-        <di:waypoint x="440" y="177" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0rnuj6d_di" bpmnElement="Flow_0rnuj6d">
-        <di:waypoint x="540" y="177" />
-        <di:waypoint x="590" y="177" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1ripp8f_di" bpmnElement="Flow_1ripp8f">
-        <di:waypoint x="540" y="235" />
-        <di:waypoint x="540" y="330" />
-        <di:waypoint x="882" y="330" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0xshy49_di" bpmnElement="Flow_0xshy49">
-        <di:waypoint x="690" y="177" />
-        <di:waypoint x="775" y="177" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0dzexq5_di" bpmnElement="Flow_0dzexq5">
-        <di:waypoint x="800" y="202" />
-        <di:waypoint x="800" y="247" />
-        <di:waypoint x="882" y="247" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="805" y="222" width="21" height="14" />
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNEdge id="Flow_0ux04sk_di" bpmnElement="Flow_0ux04sk">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="280" y="177" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_13puvyz_di" bpmnElement="Flow_13puvyz">
         <di:waypoint x="800" y="152" />
@@ -89,9 +88,30 @@
           <dc:Bounds x="811" y="137" width="9" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0ux04sk_di" bpmnElement="Flow_0ux04sk">
-        <di:waypoint x="215" y="177" />
-        <di:waypoint x="280" y="177" />
+      <bpmndi:BPMNEdge id="Flow_0dzexq5_di" bpmnElement="Flow_0dzexq5">
+        <di:waypoint x="800" y="202" />
+        <di:waypoint x="800" y="247" />
+        <di:waypoint x="882" y="247" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="805" y="222" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xshy49_di" bpmnElement="Flow_0xshy49">
+        <di:waypoint x="690" y="177" />
+        <di:waypoint x="775" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ripp8f_di" bpmnElement="Flow_1ripp8f">
+        <di:waypoint x="540" y="235" />
+        <di:waypoint x="540" y="330" />
+        <di:waypoint x="882" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rnuj6d_di" bpmnElement="Flow_0rnuj6d">
+        <di:waypoint x="540" y="177" />
+        <di:waypoint x="590" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jrpn74_di" bpmnElement="Flow_0jrpn74">
+        <di:waypoint x="380" y="177" />
+        <di:waypoint x="440" y="177" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="159" width="36" height="36" />

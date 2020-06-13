@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_02z9ccq" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_02z9ccq" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.0.0">
   <bpmn:collaboration id="Collaboration_10z9e7m">
     <bpmn:participant id="Participant_109f95u" name="Anmeldedatenüberprüfung" processRef="Anmeldedatenueberpruefung" />
   </bpmn:collaboration>
   <bpmn:process id="Anmeldedatenueberpruefung" name="Anmeldedatenüberprüfung" isExecutable="true">
     <bpmn:startEvent id="Event_07tbcms">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;gotCredentials&#39;,false)}" event="start" />
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;verified&#39;,false)}" event="start" />
+      </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0ij7val</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:endEvent id="Event_0dd5i9v" name="Anmeldedaten nicht gefunden">
@@ -36,10 +40,10 @@
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_0ij7val" sourceRef="Event_07tbcms" targetRef="Activity_098p65o" />
     <bpmn:sequenceFlow id="Flow_1g3m9pe" name="nein" sourceRef="Gateway_1v2nlyo" targetRef="Event_0dd5i9v">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${gotCredentials}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!gotCredentials}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1c378n1" name="nein" sourceRef="Gateway_0citj0b" targetRef="Event_026rajc">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${verified}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!verified}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1to9059" name="ja" sourceRef="Gateway_0citj0b" targetRef="Event_02coar9">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${verified}</bpmn:conditionExpression>
@@ -55,15 +59,26 @@
       <bpmndi:BPMNShape id="Participant_109f95u_di" bpmnElement="Participant_109f95u" isHorizontal="true">
         <dc:Bounds x="129" y="79" width="720" height="270" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_0ij7val_di" bpmnElement="Flow_0ij7val">
-        <di:waypoint x="207" y="179" />
-        <di:waypoint x="259" y="179" />
+      <bpmndi:BPMNEdge id="Flow_0dijp8x_di" bpmnElement="Flow_0dijp8x">
+        <di:waypoint x="359" y="179" />
+        <di:waypoint x="414" y="179" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1g3m9pe_di" bpmnElement="Flow_1g3m9pe">
-        <di:waypoint x="439" y="204" />
-        <di:waypoint x="439" y="251" />
+      <bpmndi:BPMNEdge id="Flow_0ec7db0_di" bpmnElement="Flow_0ec7db0">
+        <di:waypoint x="464" y="179" />
+        <di:waypoint x="519" y="179" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="444" y="225" width="21" height="14" />
+          <dc:Bounds x="487" y="161" width="9" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0uybyne_di" bpmnElement="Flow_0uybyne">
+        <di:waypoint x="619" y="179" />
+        <di:waypoint x="674" y="179" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1to9059_di" bpmnElement="Flow_1to9059">
+        <di:waypoint x="724" y="179" />
+        <di:waypoint x="771" y="179" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="743" y="161" width="9" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1c378n1_di" bpmnElement="Flow_1c378n1">
@@ -73,27 +88,16 @@
           <dc:Bounds x="704" y="225" width="21" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1to9059_di" bpmnElement="Flow_1to9059">
-        <di:waypoint x="724" y="179" />
-        <di:waypoint x="771" y="179" />
+      <bpmndi:BPMNEdge id="Flow_1g3m9pe_di" bpmnElement="Flow_1g3m9pe">
+        <di:waypoint x="439" y="204" />
+        <di:waypoint x="439" y="251" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="743" y="161" width="9" height="14" />
+          <dc:Bounds x="444" y="225" width="21" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0uybyne_di" bpmnElement="Flow_0uybyne">
-        <di:waypoint x="619" y="179" />
-        <di:waypoint x="674" y="179" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0ec7db0_di" bpmnElement="Flow_0ec7db0">
-        <di:waypoint x="464" y="179" />
-        <di:waypoint x="519" y="179" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="487" y="161" width="9" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0dijp8x_di" bpmnElement="Flow_0dijp8x">
-        <di:waypoint x="359" y="179" />
-        <di:waypoint x="414" y="179" />
+      <bpmndi:BPMNEdge id="Flow_0ij7val_di" bpmnElement="Flow_0ij7val">
+        <di:waypoint x="207" y="179" />
+        <di:waypoint x="259" y="179" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_07tbcms_di" bpmnElement="Event_07tbcms">
         <dc:Bounds x="171" y="161" width="36" height="36" />

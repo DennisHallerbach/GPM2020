@@ -33,8 +33,6 @@ public class NewDroneRequestMessage implements JavaDelegate {
         MessageCorrelationResult mcresult = runtimeService.createMessageCorrelation("NewDroneRequestMessage")
                                                             .setVariables(data)
                                                             .correlateWithResult();
-        
-        System.out.println(mcresult);
 		
 	}
 

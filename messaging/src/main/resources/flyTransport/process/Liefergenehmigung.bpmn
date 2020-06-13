@@ -1,29 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1kgiale" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.0.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1kgiale" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.0.0">
   <bpmn:collaboration id="Collaboration_00i823y">
-    <bpmn:participant id="Participant_0j0p8h2" name="Liefergenehmigung" processRef="Process_0qq9mic" />
+    <bpmn:participant id="LiefergenehmigungId" name="Liefergenehmigung" processRef="Liefergenehmigung" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_0qq9mic" name="Liefergenehmigung" isExecutable="false">
+  <bpmn:process id="Liefergenehmigung" name="Liefergenehmigung" isExecutable="true">
     <bpmn:startEvent id="Event_0pgifmw">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;deliveryApproved&#39;,false)}" event="start" />
+      </bpmn:extensionElements>
       <bpmn:outgoing>Flow_01p2kxf</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:userTask id="Activity_1qfixhi" name="Genehmigungsgrund feststellen">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="approvalType" label="Approval Type" type="enum">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+            <camunda:value id="age" name="Alter ab 18" />
+            <camunda:value id="hazardousMaterial" name="Gefahrgut" />
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_01p2kxf</bpmn:incoming>
       <bpmn:outgoing>Flow_0nc44tv</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_01p2kxf" sourceRef="Event_0pgifmw" targetRef="Activity_1qfixhi" />
     <bpmn:sequenceFlow id="Flow_0nc44tv" sourceRef="Activity_1qfixhi" targetRef="Gateway_108zqa7" />
-    <bpmn:sequenceFlow id="Flow_08sxqep" name="Ware ab 18" sourceRef="Gateway_108zqa7" targetRef="Activity_17kk8hk" />
-    <bpmn:sequenceFlow id="Flow_02sjl03" name="Gefahrgut" sourceRef="Gateway_108zqa7" targetRef="Activity_014eoen" />
+    <bpmn:sequenceFlow id="Flow_08sxqep" name="Ware ab 18" sourceRef="Gateway_108zqa7" targetRef="Activity_17kk8hk">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approvalType == "age"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_02sjl03" name="Gefahrgut" sourceRef="Gateway_108zqa7" targetRef="Activity_014eoen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approvalType == "hazardousMaterial"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1sm0v07" sourceRef="Activity_17kk8hk" targetRef="Gateway_0vsbgxr" />
     <bpmn:sequenceFlow id="Flow_0252gfo" sourceRef="Activity_014eoen" targetRef="Gateway_0vsbgxr" />
-    <bpmn:sequenceFlow id="Flow_0ef4bzc" name="ja" sourceRef="Gateway_0vsbgxr" targetRef="Event_0wn4t0l" />
-    <bpmn:sequenceFlow id="Flow_1cdyjmk" name="nein" sourceRef="Gateway_0vsbgxr" targetRef="Event_1v0lg92" />
+    <bpmn:sequenceFlow id="Flow_0ef4bzc" name="ja" sourceRef="Gateway_0vsbgxr" targetRef="Event_0wn4t0l">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${CheckOK}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1cdyjmk" name="nein" sourceRef="Gateway_0vsbgxr" targetRef="Event_1v0lg92">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">%{!CheckOK}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:callActivity id="Activity_014eoen" name="Zulassungskontrolle" calledElement="Zulassungskontrolle">
+      <bpmn:extensionElements>
+        <camunda:out source="DocumentOK" target="CheckOK" />
+        <camunda:in variables="all" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_02sjl03</bpmn:incoming>
       <bpmn:outgoing>Flow_0252gfo</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:callActivity id="Activity_17kk8hk" name="Ausweiskontrolle" calledElement="Ausweiskontrolle">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out source="AgeOK" target="CheckOK" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_08sxqep</bpmn:incoming>
       <bpmn:outgoing>Flow_1sm0v07</bpmn:outgoing>
     </bpmn:callActivity>
@@ -34,6 +64,9 @@
       <bpmn:outgoing>Flow_1cdyjmk</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:endEvent id="Event_0wn4t0l" name="genehmigt">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;deliveryApproved&#39;,true)}" event="start" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0ef4bzc</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:endEvent id="Event_1v0lg92" name="Nicht genehmigt">
@@ -47,7 +80,7 @@
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_00i823y">
-      <bpmndi:BPMNShape id="Participant_0j0p8h2_di" bpmnElement="Participant_0j0p8h2" isHorizontal="true">
+      <bpmndi:BPMNShape id="Participant_0j0p8h2_di" bpmnElement="LiefergenehmigungId" isHorizontal="true">
         <dc:Bounds x="160" y="80" width="870" height="360" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1cdyjmk_di" bpmnElement="Flow_1cdyjmk">

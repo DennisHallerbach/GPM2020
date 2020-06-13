@@ -36,7 +36,7 @@
     <bpmn:intermediateCatchEvent id="Event_146aezr" name="Lieferung nicht genehmigt">
       <bpmn:incoming>Flow_0zv3vl9</bpmn:incoming>
       <bpmn:outgoing>Flow_0aa9q13</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_1x9l43v" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1x9l43v" messageRef="Message_160827l" />
     </bpmn:intermediateCatchEvent>
     <bpmn:eventBasedGateway id="Gateway_1stzn8o">
       <bpmn:incoming>Flow_1gxcpv3</bpmn:incoming>
@@ -68,6 +68,20 @@
       <bpmn:outgoing>Flow_1gxcpv3</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:userTask id="Activity_0s3kz2t" name="Anmeldedaten korrigieren">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="username" label="Username" type="string" defaultValue="${username}">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="password" label="Passwort" type="string" defaultValue="${password}">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0fi3l2m</bpmn:incoming>
       <bpmn:outgoing>Flow_0wj4uoc</bpmn:outgoing>
     </bpmn:userTask>
@@ -115,6 +129,9 @@
       <bpmn:outgoing>Flow_1fzfrd3</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:startEvent id="StartEvent_1">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;droneDeliveryRequestSuccess&#39;,false)}" event="start" />
+      </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0agt8jl</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:intermediateCatchEvent id="Event_1n7cl6r" name="Keine Drohne verfügbar">
@@ -126,13 +143,13 @@
     <bpmn:intermediateCatchEvent id="Event_1uw5ugy" name="Dokument angefordert">
       <bpmn:incoming>Flow_11nla6n</bpmn:incoming>
       <bpmn:outgoing>Flow_0ok77vb</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0lchyt4" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0lchyt4" messageRef="Message_1391a04" />
     </bpmn:intermediateCatchEvent>
     <bpmn:userTask id="Activity_1k162xf" name="Dokument einreichen">
       <bpmn:incoming>Flow_0ok77vb</bpmn:incoming>
       <bpmn:outgoing>Flow_1bxzmxd</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sendTask id="Activity_0lda16a" name="Dokument senden">
+    <bpmn:sendTask id="Activity_0lda16a" name="Dokument senden" camunda:class="edu.thi.flytransport.messaging.servicetask.SendDocumentMessage">
       <bpmn:incoming>Flow_1bxzmxd</bpmn:incoming>
       <bpmn:outgoing>Flow_138fztd</bpmn:outgoing>
     </bpmn:sendTask>
@@ -145,6 +162,9 @@
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="Flow_0tzfn8c" sourceRef="Event_01rrct4" targetRef="Event_18p8stw" />
     <bpmn:endEvent id="Event_18p8stw" name="Anfrage erfolgreich">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;droneDeliveryRequestSuccess&#39;,true)}" event="start" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0tzfn8c</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:endEvent id="Event_0kfret7" name="Keine Drohne verfügbar">
@@ -152,13 +172,32 @@
     </bpmn:endEvent>
     <bpmn:endEvent id="Event_10hohze" name="Sendung nicht genehmigt">
       <bpmn:incoming>Flow_0aa9q13</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TerminateEventDefinition_0dqbjyc" />
     </bpmn:endEvent>
   </bpmn:process>
+  <bpmn:message id="Message_1391a04" name="RequestDocumentMessage" />
+  <bpmn:message id="Message_160827l" name="DeliveryNotApprovedMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1kfi7hk">
       <bpmndi:BPMNShape id="Participant_1wrb585_di" bpmnElement="Participant_1wrb585" isHorizontal="true">
         <dc:Bounds x="125" y="116" width="1563" height="754" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0tzfn8c_di" bpmnElement="Flow_0tzfn8c">
+        <di:waypoint x="1498" y="610" />
+        <di:waypoint x="1572" y="610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bxzmxd_di" bpmnElement="Flow_1bxzmxd">
+        <di:waypoint x="1360" y="730" />
+        <di:waypoint x="1360" y="770" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ok77vb_di" bpmnElement="Flow_0ok77vb">
+        <di:waypoint x="1258" y="690" />
+        <di:waypoint x="1310" y="690" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1osy90w_di" bpmnElement="Flow_1osy90w">
+        <di:waypoint x="1148" y="520" />
+        <di:waypoint x="1572" y="520" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1fzfrd3_di" bpmnElement="Flow_1fzfrd3">
         <di:waypoint x="390" y="177" />
         <di:waypoint x="445" y="177" />
@@ -237,45 +276,14 @@
         <di:waypoint x="1020" y="432" />
         <di:waypoint x="1020" y="392" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1osy90w_di" bpmnElement="Flow_1osy90w">
-        <di:waypoint x="1148" y="520" />
-        <di:waypoint x="1572" y="520" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0ok77vb_di" bpmnElement="Flow_0ok77vb">
-        <di:waypoint x="1258" y="690" />
-        <di:waypoint x="1310" y="690" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1bxzmxd_di" bpmnElement="Flow_1bxzmxd">
-        <di:waypoint x="1360" y="730" />
-        <di:waypoint x="1360" y="770" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0tzfn8c_di" bpmnElement="Flow_0tzfn8c">
-        <di:waypoint x="1498" y="610" />
-        <di:waypoint x="1572" y="610" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="179" y="159" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1iqsxpn_di" bpmnElement="Activity_1iqsxpn">
-        <dc:Bounds x="290" y="137" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0lut3vy_di" bpmnElement="Gateway_0lut3vy" isMarkerVisible="true">
-        <dc:Bounds x="445" y="152" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0s3kz2t_di" bpmnElement="Activity_0s3kz2t">
-        <dc:Bounds x="550" y="137" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ouv65n_di" bpmnElement="Activity_0ouv65n">
-        <dc:Bounds x="420" y="250" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1x2pmwj_di" bpmnElement="Event_1x2pmwj">
-        <dc:Bounds x="892" y="349" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_146aezr_di" bpmnElement="Event_146aezr">
+        <dc:Bounds x="792" y="272" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="874" y="311.5" width="71" height="27" />
+          <dc:Bounds x="773" y="234.5" width="73" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1w6kp5y_di" bpmnElement="Gateway_1w6kp5y" isMarkerVisible="true">
-        <dc:Bounds x="995" y="342" width="50" height="50" />
+      <bpmndi:BPMNShape id="Gateway_1stzn8o_di" bpmnElement="Gateway_1stzn8o">
+        <dc:Bounds x="575" y="265" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0kdnjiu_di" bpmnElement="Event_0kdnjiu">
         <dc:Bounds x="1002" y="432" width="36" height="36" />
@@ -283,14 +291,29 @@
           <dc:Bounds x="1048" y="437" width="73" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1stzn8o_di" bpmnElement="Gateway_1stzn8o">
-        <dc:Bounds x="575" y="265" width="50" height="50" />
+      <bpmndi:BPMNShape id="Gateway_1w6kp5y_di" bpmnElement="Gateway_1w6kp5y" isMarkerVisible="true">
+        <dc:Bounds x="995" y="342" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_146aezr_di" bpmnElement="Event_146aezr">
-        <dc:Bounds x="792" y="272" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_1x2pmwj_di" bpmnElement="Event_1x2pmwj">
+        <dc:Bounds x="892" y="349" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="773" y="234.5" width="73" height="27" />
+          <dc:Bounds x="874" y="311.5" width="71" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ouv65n_di" bpmnElement="Activity_0ouv65n">
+        <dc:Bounds x="420" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0s3kz2t_di" bpmnElement="Activity_0s3kz2t">
+        <dc:Bounds x="550" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0lut3vy_di" bpmnElement="Gateway_0lut3vy" isMarkerVisible="true">
+        <dc:Bounds x="445" y="152" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1iqsxpn_di" bpmnElement="Activity_1iqsxpn">
+        <dc:Bounds x="290" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1n7cl6r_di" bpmnElement="Event_1n7cl6r">
         <dc:Bounds x="1112" y="502" width="36" height="36" />
@@ -328,7 +351,7 @@
           <dc:Bounds x="1556" y="545" width="68" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_10hohze_di" bpmnElement="Event_10hohze">
+      <bpmndi:BPMNShape id="Event_13moe0j_di" bpmnElement="Event_10hohze">
         <dc:Bounds x="892" y="222" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="874" y="268" width="71" height="27" />
