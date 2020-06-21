@@ -26,4 +26,4 @@
 ## Meeting 21.06
 - User loop ändern
 - Prozess muss laufen
-- 
+- Adhoc Teilprozess Ad-hoc Teilprozess
