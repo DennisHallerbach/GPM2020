@@ -22,3 +22,8 @@
 - Ordnung in BpMN prozesse
 - Substantivierung in Unterprozessen
 - Mehr Vielfalt!!!
+
+## Meeting 21.06
+- User loop ändern
+- Prozess muss laufen
+- 
