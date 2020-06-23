@@ -27,3 +27,11 @@
 - User loop ändern
 - Prozess muss laufen
 - Adhoc Teilprozess Ad-hoc Teilprozess
+
+## Meeting 23.06
+- Ordnernamen für Prozesse sprechender Machen
+- Transaktionen mit Canncel Ereignis zurückrollen
+- In Transaktion 2x Error --> am Rand nur 1x --> ausbessern
+- Lanes beschriften
+- Schleifenmarkierung
+- Ad Hoc
