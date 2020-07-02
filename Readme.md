@@ -35,3 +35,14 @@
 - Lanes beschriften
 - Schleifenmarkierung
 - Ad Hoc
+
+## Meeting 02.07
+- Kooperierende Prozesse Check
+- Hierachie Check
+- angeheftete Ereignisse Check  
+- Ereignis-TeilProzess !!!!!!!!!!
+- Transaktionsteilprozess Verbessern!
+- Ad-Hoc-Teilprozess Paket anmelden! Dennis
+- Mehrfachinstanzmakierung !!!!!!!!
+- Geschäftsregeln Wetter Zahlung und Verfügbarkeit
+- ProcessID Korrelation -> Businesskey Korrelation
