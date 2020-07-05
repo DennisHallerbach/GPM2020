@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="checksending" name="checksending" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.0.0">
+  <decision id="checksending_1" name="Überprüfung">
+    <informationRequirement id="InformationRequirement_1yyifkw">
+      <requiredDecision href="#Decision_0vtizyb" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0uppbkn">
+      <requiredDecision href="#Decision_0iyljqn" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1ujmdon">
+      <input id="Input_1" label="Erwachsen">
+        <inputExpression id="InputExpression_1" typeRef="boolean">
+          <text>erwachsen</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1uzz89z" label="Gefahr">
+        <inputExpression id="LiteralExpression_1302col" typeRef="boolean">
+          <text>gefahr</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="requiresApproval" name="requiresApproval" typeRef="boolean" />
+      <output id="OutputClause_10v1jox" label="dangerousApproval" name="dangerousApproval" typeRef="boolean" />
+      <output id="OutputClause_10lbdoe" label="ageApproval" name="ageApproval" typeRef="boolean" />
+      <rule id="DecisionRule_1kpojbd">
+        <inputEntry id="UnaryTests_1m3qpz7">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xntfxz">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0uvb3ma">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rugeg7">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1weirki">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_12fy5nf">
+        <inputEntry id="UnaryTests_1vpczqn">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pi8sbj">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_016ea68">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rb8scv">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0eq7lt6">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_07joh3h">
+        <inputEntry id="UnaryTests_1f88vwd">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11zh4h3">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1pn2nev">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_08snrfe">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0f71msp">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ya44lb">
+        <inputEntry id="UnaryTests_07a9ryq">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ffk3yo">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18fydn1">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0brlwz4">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0q8z5jc">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="age" name="Age" />
+  <inputData id="destination" name="Destination" />
+  <inputData id="InputData_1wlgkhw" name="Dangerous Goods" />
+  <decision id="Decision_0vtizyb" name="Gefahrengut">
+    <informationRequirement id="InformationRequirement_1dq2zmy">
+      <requiredInput href="#destination" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1x28tx6">
+      <requiredInput href="#InputData_1wlgkhw" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0ny627g">
+      <input id="InputClause_1f4mrgu" label="dangerous">
+        <inputExpression id="LiteralExpression_0a34mft" typeRef="string">
+          <text>dangerous</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_00p6e44" label="destination">
+        <inputExpression id="LiteralExpression_0in4j13" typeRef="string">
+          <text>destination</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0zs4w6j" label="gefahr" name="gefahr" typeRef="boolean" />
+      <rule id="DecisionRule_04yymsj">
+        <inputEntry id="UnaryTests_0gcb57w">
+          <text>"chemie"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06xtd3e">
+          <text>"germany"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ewgz9g">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1qa5sjm">
+        <inputEntry id="UnaryTests_1lfukem">
+          <text>"chemie"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1m7o7td">
+          <text>"france"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0n72fto">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0g0otc8">
+        <inputEntry id="UnaryTests_08xeb07">
+          <text>"chemie"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qg9u1a">
+          <text>"china"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1r2iztd">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1p3nsu6">
+        <inputEntry id="UnaryTests_0t8lmtb">
+          <text>"chemie"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0b6aqy9">
+          <text>"usa"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1cz9yzv">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0wh9aqa">
+        <inputEntry id="UnaryTests_06udezf">
+          <text>"sprengstoff"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1f61ff0">
+          <text>"germany"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1wb8kku">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0qr7mxl">
+        <inputEntry id="UnaryTests_1ej2y9s">
+          <text>"sprengstoff"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y838zf">
+          <text>"france"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1h2hyz2">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_11eimwo">
+        <inputEntry id="UnaryTests_0xn724t">
+          <text>"sprengstoff"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0w2rdt8">
+          <text>"china"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1mtdthv">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0yoz2dp">
+        <inputEntry id="UnaryTests_02frqlq">
+          <text>"sprengstoff"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kw2i3m">
+          <text>"usa</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0recevf">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1rzrloz">
+        <inputEntry id="UnaryTests_0gg5v0q">
+          <text>"treibstoff"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1muv4q9">
+          <text>"germany"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0wjszng">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_10e6tak">
+        <inputEntry id="UnaryTests_1ebg6ot">
+          <text>"treibstoff"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jgiubx">
+          <text>"france"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0h15rto">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1gelba4">
+        <inputEntry id="UnaryTests_1uv9x94">
+          <text>"treibstoff"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0aa7rve">
+          <text>"china"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0rkj3ye">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1c7tt5f">
+        <inputEntry id="UnaryTests_02rulfe">
+          <text>"treibstoff"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02f0wgc">
+          <text>"usa"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1dhrwod">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0kk67ez">
+        <inputEntry id="UnaryTests_1yufqno">
+          <text>"gift"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0w9p6ol">
+          <text>"germany"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1dc9n0s">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1s8sb3p">
+        <inputEntry id="UnaryTests_1bxpy1r">
+          <text>"gift"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10huhgg">
+          <text>"france"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13h7evv">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0vrne7t">
+        <inputEntry id="UnaryTests_1hn6h8f">
+          <text>"gift"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0twedel">
+          <text>"china"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1w53zkz">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1j4tn6r">
+        <inputEntry id="UnaryTests_0afjzqq">
+          <text>"gift"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_111w6ve">
+          <text>"usa"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1f1iszz">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_10hqon6">
+        <description></description>
+        <inputEntry id="UnaryTests_0z2qkoe">
+          <text>"notdangerous"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16jpxb9">
+          <text>germany</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_14wqizh">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0hg4yvq">
+        <inputEntry id="UnaryTests_112tsw4">
+          <text>"notdangerous"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wieyzk">
+          <text>france</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_00bgqgr">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0zvrybj">
+        <inputEntry id="UnaryTests_0hrvpeq">
+          <text>"notdangerous"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0l9cbft">
+          <text>china</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1yenc1w">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0qpe18v">
+        <inputEntry id="UnaryTests_1nwdlec">
+          <text>"notdangerous"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sq1lty">
+          <text>usa</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1h49gec">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="Decision_0iyljqn" name="Erwachsen">
+    <informationRequirement id="InformationRequirement_1rfxt7o">
+      <requiredInput href="#age" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_12nyea8">
+      <requiredInput href="#destination" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1txr2qm">
+      <input id="InputClause_15q50bq" label="Age">
+        <inputExpression id="LiteralExpression_042ms4g" typeRef="long">
+          <text>age</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0eflxj2" label="destination">
+        <inputExpression id="LiteralExpression_04wlv5q" typeRef="string">
+          <text>destination</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0d4gg2v" label="erwachsen" name="erwachsen" typeRef="boolean" />
+      <rule id="DecisionRule_1u99wjl">
+        <inputEntry id="UnaryTests_02xhyxh">
+          <text>&gt; 17</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ixxfzd">
+          <text>"germany"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0dvaz4i">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ek4msd">
+        <inputEntry id="UnaryTests_0rs83qa">
+          <text>&lt; 18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17clcto">
+          <text>"germany"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18x0uyi">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0000xkk">
+        <inputEntry id="UnaryTests_009vx60">
+          <text>&gt; 17</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0knph66">
+          <text>"france"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0rxhvu0">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1rzbym2">
+        <inputEntry id="UnaryTests_0qhnign">
+          <text>&lt;18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1586xov">
+          <text>"france"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_159hjya">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1nmcyqx">
+        <inputEntry id="UnaryTests_1tu5g6o">
+          <text>&lt;21</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ixnquy">
+          <text>"usa"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1gsv1rc">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1dqjpy5">
+        <inputEntry id="UnaryTests_013xih9">
+          <text>&gt;20</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cady5s">
+          <text>"usa"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_03764rf">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0gybvn7">
+        <inputEntry id="UnaryTests_10238w8">
+          <text>&lt;18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01i2rak">
+          <text>"china"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0kdjx85">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0z15ss7">
+        <inputEntry id="UnaryTests_11fngp4">
+          <text>&gt;17</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1b52gl6">
+          <text>"china"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0lcbgba">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="checksending_1">
+        <dc:Bounds height="80" width="180" x="410" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0y6fbw3" dmnElementRef="age">
+        <dc:Bounds height="45" width="125" x="158" y="438" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0alohqu" dmnElementRef="destination">
+        <dc:Bounds height="45" width="125" x="448" y="439" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_02f9t25" dmnElementRef="InputData_1wlgkhw">
+        <dc:Bounds height="45" width="125" x="748" y="439" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_06s3ulm" dmnElementRef="InformationRequirement_1rfxt7o">
+        <di:waypoint x="221" y="438" />
+        <di:waypoint x="300" y="380" />
+        <di:waypoint x="300" y="360" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0lo89yh" dmnElementRef="InformationRequirement_12nyea8">
+        <di:waypoint x="511" y="439" />
+        <di:waypoint x="360" y="380" />
+        <di:waypoint x="360" y="360" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1w8p9vh" dmnElementRef="InformationRequirement_1dq2zmy">
+        <di:waypoint x="511" y="439" />
+        <di:waypoint x="710" y="380" />
+        <di:waypoint x="710" y="360" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0awtwbj" dmnElementRef="InformationRequirement_1x28tx6">
+        <di:waypoint x="811" y="439" />
+        <di:waypoint x="770" y="380" />
+        <di:waypoint x="770" y="360" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0uzohlc" dmnElementRef="InformationRequirement_1yyifkw">
+        <di:waypoint x="740" y="280" />
+        <di:waypoint x="530" y="180" />
+        <di:waypoint x="530" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0etamb2" dmnElementRef="InformationRequirement_0uppbkn">
+        <di:waypoint x="330" y="280" />
+        <di:waypoint x="470" y="180" />
+        <di:waypoint x="470" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0jhfpcu" dmnElementRef="Decision_0vtizyb">
+        <dc:Bounds height="80" width="180" x="650" y="280" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0sgpk6f" dmnElementRef="Decision_0iyljqn">
+        <dc:Bounds height="80" width="180" x="240" y="280" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

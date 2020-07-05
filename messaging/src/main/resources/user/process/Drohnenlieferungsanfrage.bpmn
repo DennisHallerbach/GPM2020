@@ -123,6 +123,30 @@
               <camunda:constraint name="required" />
             </camunda:validation>
           </camunda:formField>
+          <camunda:formField id="age" label="Age" type="long">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="dangerous" label="Dangerous Goods" type="enum">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+            <camunda:value id="chemie" name="Chemie" />
+            <camunda:value id="sprengstoff" name="Sprengstoff" />
+            <camunda:value id="treibstoff" name="Treibstoff" />
+            <camunda:value id="gift" name="Gift" />
+            <camunda:value id="notdangerous" name="Nicht gefährlich" />
+          </camunda:formField>
+          <camunda:formField id="destination" label="Destination" type="enum">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+            <camunda:value id="germany" name="Germany" />
+            <camunda:value id="usa" name="USA" />
+            <camunda:value id="france" name="Frankreich" />
+            <camunda:value id="china" name="China" />
+          </camunda:formField>
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0agt8jl</bpmn:incoming>

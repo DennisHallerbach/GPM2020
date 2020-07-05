@@ -10,21 +10,6 @@
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_01p2kxf</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:userTask id="Activity_1qfixhi" name="Genehmigungsgrund feststellen">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="approvalType" label="Approval Type" type="enum">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-            <camunda:value id="age" name="Alter ab 18" />
-            <camunda:value id="hazardousMaterial" name="Gefahrgut" />
-          </camunda:formField>
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_01p2kxf</bpmn:incoming>
-      <bpmn:outgoing>Flow_0nc44tv</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_01p2kxf" sourceRef="Event_0pgifmw" targetRef="Activity_1qfixhi" />
     <bpmn:sequenceFlow id="Flow_0nc44tv" sourceRef="Activity_1qfixhi" targetRef="Gateway_108zqa7" />
     <bpmn:sequenceFlow id="Flow_08sxqep" name="Ware ab 18" sourceRef="Gateway_108zqa7" targetRef="Activity_17kk8hk">
@@ -77,6 +62,31 @@
       <bpmn:outgoing>Flow_08sxqep</bpmn:outgoing>
       <bpmn:outgoing>Flow_02sjl03</bpmn:outgoing>
     </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Activity_1qfixhi" name="Genehmigungsgrund feststellen" camunda:assignee="kermit" camunda:candidateUsers="kermit" camunda:candidateGroups="kermit">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="approvalType" label="Approval Type" type="enum">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+            <camunda:value id="age" name="Alter ab 18" />
+            <camunda:value id="hazardousMaterial" name="Gefahrgut" />
+          </camunda:formField>
+          <camunda:formField id="ageApproval" label="AgeApproval" type="string" defaultValue="${resultneedverification.ageApproval}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="dangerousApproval" label="dangerousApproval" type="boolean" defaultValue="${resultneedverification.dangerousApproval}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_01p2kxf</bpmn:incoming>
+      <bpmn:outgoing>Flow_0nc44tv</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_00i823y">
