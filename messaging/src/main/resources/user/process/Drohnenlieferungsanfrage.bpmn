@@ -123,6 +123,30 @@
               <camunda:constraint name="required" />
             </camunda:validation>
           </camunda:formField>
+          <camunda:formField id="age" label="Age" type="long">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="dangerous" label="Dangerous Goods" type="enum">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+            <camunda:value id="chemie" name="Chemie" />
+            <camunda:value id="sprengstoff" name="Sprengstoff" />
+            <camunda:value id="treibstoff" name="Treibstoff" />
+            <camunda:value id="gift" name="Gift" />
+            <camunda:value id="notdangerous" name="Nicht gefährlich" />
+          </camunda:formField>
+          <camunda:formField id="destination" label="Destination" type="enum">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+            <camunda:value id="germany" name="Deutschland" />
+            <camunda:value id="usa" name="USA" />
+            <camunda:value id="france" name="Frankreich" />
+            <camunda:value id="china" name="China" />
+          </camunda:formField>
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0agt8jl</bpmn:incoming>
@@ -145,7 +169,16 @@
       <bpmn:outgoing>Flow_0ok77vb</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0lchyt4" messageRef="Message_1391a04" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:userTask id="Activity_1k162xf" name="Dokument einreichen">
+    <bpmn:userTask id="Activity_1k162xf" name="Dokument einreichen" camunda:assignee="fozzie">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="document" label="Dokument hochladen" type="boolean">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0ok77vb</bpmn:incoming>
       <bpmn:outgoing>Flow_1bxzmxd</bpmn:outgoing>
     </bpmn:userTask>

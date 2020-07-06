@@ -22,7 +22,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:extensionElements>
-        <camunda:executionListener expression="${expression.setVariableLocal(&#39;AgeOK&#39;,false)}" event="start" />
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;AgeOK&#39;,false)}" event="start" />
         <camunda:executionListener expression="${execution.setVariableLocal(&#39;IDCardCounter&#39;,1)}" event="start" />
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0ls92xp</bpmn:outgoing>
@@ -31,10 +31,6 @@
       <bpmn:incoming>Flow_0x9umdq</bpmn:incoming>
       <bpmn:terminateEventDefinition id="TerminateEventDefinition_1pq22j5" />
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Activity_1jrnwiu" name="Ausweis prüfen" camunda:class="edu.thi.flytransport.messaging.servicetask.CheckIDCardTask">
-      <bpmn:incoming>Flow_0656pz2</bpmn:incoming>
-      <bpmn:outgoing>Flow_06akzh5</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:exclusiveGateway id="Gateway_1a8rjfc" name="Ausweiß zulässig?">
       <bpmn:incoming>Flow_06akzh5</bpmn:incoming>
       <bpmn:outgoing>Flow_17r802b</bpmn:outgoing>
@@ -100,6 +96,24 @@
 counter++;
 execution.setVariabl("IDCardCounter",counter);</bpmn:script>
     </bpmn:scriptTask>
+    <bpmn:userTask id="Activity_1jrnwiu" name="Ausweis prüfen" camunda:assignee="kermit">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="IDCardCheck" label="IDCardCheck" type="boolean">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="AgeOK" label="AgeOK" type="boolean">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0656pz2</bpmn:incoming>
+      <bpmn:outgoing>Flow_06akzh5</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:message id="Message_1bu76oc" name="SendDocumentMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -169,7 +183,6 @@ execution.setVariabl("IDCardCounter",counter);</bpmn:script>
         <di:waypoint x="895" y="270" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0656pz2_di" bpmnElement="Flow_0656pz2">
-        <di:waypoint x="640" y="300" />
         <di:waypoint x="640" y="270" />
         <di:waypoint x="730" y="270" />
       </bpmndi:BPMNEdge>
@@ -198,9 +211,6 @@ execution.setVariabl("IDCardCounter",counter);</bpmn:script>
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1139" y="195" width="83" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1jrnwiu_di" bpmnElement="Activity_1jrnwiu">
-        <dc:Bounds x="730" y="230" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1a8rjfc_di" bpmnElement="Gateway_1a8rjfc" isMarkerVisible="true">
         <dc:Bounds x="895" y="245" width="50" height="50" />
@@ -240,6 +250,9 @@ execution.setVariabl("IDCardCounter",counter);</bpmn:script>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1b6r2jm_di" bpmnElement="Activity_0v65spn">
         <dc:Bounds x="870" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ljrn98_di" bpmnElement="Activity_1jrnwiu">
+        <dc:Bounds x="730" y="230" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_075iex5_di" bpmnElement="Event_075iex5">
         <dc:Bounds x="622" y="212" width="36" height="36" />
