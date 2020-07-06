@@ -8,10 +8,12 @@ public class DeliveryAbortedMessage implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		String userProcessId = (String) execution.getVariable("userProcessId");
+		String correlationId = (String) execution.getVariable("correlationId");
         RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
-		runtimeService.createMessageCorrelation("DeliveryAbortedMessage")
-				.processInstanceVariableEquals("processId", userProcessId).correlate();
+        runtimeService.createMessageCorrelation("DeliveryAbortedMessage")
+			.processInstanceVariableEquals("processId", correlationId)
+			.setVariable("correlationId", execution.getVariable("processId"))
+            .correlateWithResult();
 	}
 
 }

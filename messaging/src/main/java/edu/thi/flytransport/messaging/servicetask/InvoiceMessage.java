@@ -18,10 +18,14 @@ public class InvoiceMessage implements JavaDelegate {
 		data.put("invoiceNr", invoiceNr);
 		data.put("invoiceAmount", invoiceAmount);
 		data.put("invoiceDescription", invoiceDescription);
-		String userProcessId = (String) execution.getVariable("userProcessId");
+		
+		String correlationId = (String) execution.getVariable("correlationId");
         RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
-		runtimeService.createMessageCorrelation("InvoiceMessage").setVariables(data)
-				.processInstanceVariableEquals("processId", userProcessId).correlate();
+        runtimeService.createMessageCorrelation("InvoiceMessage")
+			.processInstanceVariableEquals("processId", correlationId)
+			.setVariables(data)
+			.setVariable("correlationId", execution.getVariable("processId"))
+            .correlateWithResult();
 	}
 
 }

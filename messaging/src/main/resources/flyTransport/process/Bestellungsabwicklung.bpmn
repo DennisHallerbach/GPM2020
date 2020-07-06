@@ -39,7 +39,7 @@
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5M</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
-    <bpmn:intermediateCatchEvent id="Event_0yrfvbr" name="Bestellung empfangen">
+    <bpmn:intermediateCatchEvent id="Event_0yrfvbr" name="Bestellung empfangen" camunda:asyncBefore="true">
       <bpmn:incoming>Flow_06p6voo</bpmn:incoming>
       <bpmn:outgoing>Flow_0r829yg</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_14wz5wj" messageRef="Message_0gpigo8" />

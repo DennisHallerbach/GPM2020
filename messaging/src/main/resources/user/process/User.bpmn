@@ -19,7 +19,7 @@
     </bpmn:laneSet>
     <bpmn:startEvent id="Event_14opkwo">
       <bpmn:extensionElements>
-        <camunda:executionListener expression="${execution.setVariable(&#39;processId&#39;,execution.getId())}" event="start" />
+        <camunda:executionListener expression="${execution.setVariable(&#34;processId&#34;,execution.getProcessInstanceId())}" event="end" />
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0vf4kzs</bpmn:outgoing>
     </bpmn:startEvent>

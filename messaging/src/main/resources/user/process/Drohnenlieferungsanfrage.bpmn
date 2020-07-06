@@ -67,7 +67,7 @@
       <bpmn:incoming>Flow_0abadex</bpmn:incoming>
       <bpmn:outgoing>Flow_1gxcpv3</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:userTask id="Activity_0s3kz2t" name="Anmeldedaten korrigieren">
+    <bpmn:userTask id="Activity_0s3kz2t" name="Anmeldedaten korrigieren" camunda:assignee="fozzie">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="username" label="Username" type="string" defaultValue="${username}">
@@ -164,7 +164,7 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_16icdo2" messageRef="Message_14bvszu" />
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="Flow_1osy90w" sourceRef="Event_1n7cl6r" targetRef="Event_0kfret7" />
-    <bpmn:intermediateCatchEvent id="Event_1uw5ugy" name="Dokument angefordert">
+    <bpmn:intermediateCatchEvent id="Event_1uw5ugy" name="Dokument angefordert" camunda:asyncBefore="true">
       <bpmn:incoming>Flow_11nla6n</bpmn:incoming>
       <bpmn:outgoing>Flow_0ok77vb</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0lchyt4" messageRef="Message_1391a04" />

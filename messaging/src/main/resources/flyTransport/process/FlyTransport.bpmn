@@ -23,7 +23,10 @@
         <bpmn:flowNodeRef>Gateway_0bpsby5</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:startEvent id="Event_1qwk7uy" name="Anfrage empfangen">
+    <bpmn:startEvent id="Event_1qwk7uy" name="Anfrage empfangen" camunda:asyncBefore="true">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariable(&#34;processId&#34;,execution.getProcessInstanceId())}" event="end" />
+      </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0djog53</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1wcjsj9" messageRef="Message_0gx6ltl" />
     </bpmn:startEvent>
@@ -118,6 +121,10 @@
       <bpmndi:BPMNShape id="Lane_0va5gvb_di" bpmnElement="Lane_0va5gvb" isHorizontal="true">
         <dc:Bounds x="170" y="230" width="1170" height="200" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0djog53_di" bpmnElement="Flow_0djog53">
+        <di:waypoint x="348" y="300" />
+        <di:waypoint x="400" y="300" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1dwdsia_di" bpmnElement="Flow_1dwdsia">
         <di:waypoint x="1205" y="160" />
         <di:waypoint x="1280" y="160" />
@@ -175,10 +182,6 @@
       <bpmndi:BPMNEdge id="Flow_1ca67mv_di" bpmnElement="Flow_1ca67mv">
         <di:waypoint x="500" y="300" />
         <di:waypoint x="555" y="300" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0djog53_di" bpmnElement="Flow_0djog53">
-        <di:waypoint x="348" y="300" />
-        <di:waypoint x="400" y="300" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1qwk7uy_di" bpmnElement="Event_1qwk7uy">
         <dc:Bounds x="312" y="282" width="36" height="36" />

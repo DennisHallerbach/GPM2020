@@ -6,8 +6,6 @@ import java.util.Map;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpm.engine.runtime.Execution;
-import org.camunda.bpm.engine.runtime.MessageCorrelationResult;
 
 
 public class NewDroneRequestMessage implements JavaDelegate {
@@ -20,7 +18,6 @@ public class NewDroneRequestMessage implements JavaDelegate {
 		Long packetWidth = (Long) execution.getVariable("packetWidth");
 		Long packetHeight = (Long) execution.getVariable("packetHeight");
 		Long packetWeight = (Long) execution.getVariable("packetWeight");
-		String processId = (String) execution.getVariable("processId");
 		Long age = (Long) execution.getVariable("age");
 		String dangerous = (String) execution.getVariable("dangerous");
 		String destination = (String) execution.getVariable("destination");
@@ -31,14 +28,14 @@ public class NewDroneRequestMessage implements JavaDelegate {
 		data.put("packetWidth", packetWidth);
 		data.put("packetHeight", packetHeight);
 		data.put("packetWeight", packetWeight);
-		data.put("userProcessId",processId);
 		data.put("age", age);
 		data.put("dangerous", dangerous);
 		data.put("destination",destination);
 		
 		RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
-        MessageCorrelationResult mcresult = runtimeService.createMessageCorrelation("NewDroneRequestMessage")
+        runtimeService.createMessageCorrelation("NewDroneRequestMessage")
                                                             .setVariables(data)
+                                                            .setVariable("correlationId",execution.getVariable("processId"))
                                                             .correlateWithResult();
 		
 	}
