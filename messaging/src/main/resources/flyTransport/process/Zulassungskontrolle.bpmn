@@ -21,7 +21,7 @@
       <bpmn:incoming>Flow_0jrpn74</bpmn:incoming>
       <bpmn:outgoing>Flow_0rnuj6d</bpmn:outgoing>
     </bpmn:receiveTask>
-    <bpmn:userTask id="Activity_0k3eo9o" name="Zulassung genehmigen">
+    <bpmn:userTask id="Activity_0k3eo9o" name="Zulassung genehmigen" camunda:assignee="kermit">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="documentApproved" label="Zulassung ok?" type="boolean" defaultValue="false">

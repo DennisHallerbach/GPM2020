@@ -295,7 +295,7 @@
           <text>"notdangerous"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_16jpxb9">
-          <text>germany</text>
+          <text>"germany"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_14wqizh">
           <text>false</text>
@@ -306,7 +306,7 @@
           <text>"notdangerous"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0wieyzk">
-          <text>france</text>
+          <text>"france"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_00bgqgr">
           <text>false</text>
@@ -317,7 +317,7 @@
           <text>"notdangerous"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0l9cbft">
-          <text>china</text>
+          <text>"china"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1yenc1w">
           <text>false</text>
@@ -328,7 +328,7 @@
           <text>"notdangerous"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0sq1lty">
-          <text>usa</text>
+          <text>"usa"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1h49gec">
           <text>false</text>
