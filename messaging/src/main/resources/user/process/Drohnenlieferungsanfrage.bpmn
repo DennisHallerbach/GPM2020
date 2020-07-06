@@ -142,7 +142,7 @@
             <camunda:validation>
               <camunda:constraint name="required" />
             </camunda:validation>
-            <camunda:value id="germany" name="Germany" />
+            <camunda:value id="germany" name="Deutschland" />
             <camunda:value id="usa" name="USA" />
             <camunda:value id="france" name="Frankreich" />
             <camunda:value id="china" name="China" />
