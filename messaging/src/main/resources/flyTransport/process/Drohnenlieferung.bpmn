@@ -65,7 +65,7 @@
       <bpmn:startEvent id="Event_097dbsv">
         <bpmn:outgoing>Flow_0r7kkvg</bpmn:outgoing>
       </bpmn:startEvent>
-      <bpmn:receiveTask id="Activity_1lu305l" name="Paketabgestelltnachricht empfangen" messageRef="Message_0k93gtj">
+      <bpmn:receiveTask id="Activity_1lu305l" name="Paketabgestelltnachricht empfangen" camunda:asyncBefore="true" messageRef="Message_0k93gtj">
         <bpmn:incoming>Flow_0r7kkvg</bpmn:incoming>
         <bpmn:outgoing>Flow_0bhbuu0</bpmn:outgoing>
       </bpmn:receiveTask>
@@ -104,7 +104,7 @@
     </bpmn:boundaryEvent>
     <bpmn:endEvent id="Event_1l5a7ry" name="Lieferung abgebrochen">
       <bpmn:incoming>Flow_10qkk3y</bpmn:incoming>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0zl6u4e" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0zl6u4e" camunda:class="edu.thi.flytransport.messaging.servicetask.DeliveryAbortedMessage" />
     </bpmn:endEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">

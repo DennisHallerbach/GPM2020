@@ -9,10 +9,12 @@ public class SendDocumentMessage implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		String deliveryProcessId = (String) execution.getVariable("deliveryProcessId");
+		String correlationId = (String) execution.getVariable("correlationId");
         RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
-		runtimeService.createMessageCorrelation("SendDocumentMessage")
-				.processInstanceVariableEquals("processId", deliveryProcessId).correlate();
+        runtimeService.createMessageCorrelation("SendDocumentMessage")
+			.processInstanceVariableEquals("processId", correlationId)
+			.setVariable("correlationId", execution.getVariable("processId"))
+            .correlateWithResult();
 	}
 
 }

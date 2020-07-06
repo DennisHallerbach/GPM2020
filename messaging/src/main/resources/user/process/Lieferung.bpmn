@@ -18,7 +18,7 @@
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0898ixi</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:userTask id="Activity_0za178y" name="Paket zur Abholung abstellen">
+    <bpmn:userTask id="Activity_0za178y" name="Paket zur Abholung abstellen" camunda:assignee="fozzie">
       <bpmn:incoming>Flow_0898ixi</bpmn:incoming>
       <bpmn:outgoing>Flow_12om8xy</bpmn:outgoing>
     </bpmn:userTask>

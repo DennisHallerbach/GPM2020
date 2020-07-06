@@ -17,7 +17,7 @@
       <bpmn:incoming>Flow_0ux04sk</bpmn:incoming>
       <bpmn:outgoing>Flow_0jrpn74</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:receiveTask id="Activity_15x9jt4" name="Zulassungsdokument erhalten" messageRef="Message_0v6nv71">
+    <bpmn:receiveTask id="Activity_15x9jt4" name="Zulassungsdokument erhalten" camunda:asyncBefore="true" messageRef="Message_0v6nv71">
       <bpmn:incoming>Flow_0jrpn74</bpmn:incoming>
       <bpmn:outgoing>Flow_0rnuj6d</bpmn:outgoing>
     </bpmn:receiveTask>
@@ -59,7 +59,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!documentApproved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_13puvyz" name="ja" sourceRef="Gateway_00x70vt" targetRef="Event_0mb61g4">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!documentApproved}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${documentApproved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0ux04sk" sourceRef="StartEvent_1" targetRef="Activity_0c4bpd9" />
     <bpmn:endEvent id="Event_1645m3f" name="Zulassung nicht ok">
@@ -70,7 +70,7 @@
       <bpmn:terminateEventDefinition id="TerminateEventDefinition_0d1779j" />
     </bpmn:endEvent>
   </bpmn:process>
-  <bpmn:message id="Message_0v6nv71" name="DocumentMessage" />
+  <bpmn:message id="Message_0v6nv71" name="SendDocumentMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0tn7g90">
       <bpmndi:BPMNShape id="Participant_1shj889_di" bpmnElement="Participant_1shj889" isHorizontal="true">

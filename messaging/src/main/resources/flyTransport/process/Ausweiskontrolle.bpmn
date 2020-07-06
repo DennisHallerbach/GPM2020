@@ -11,7 +11,7 @@
       <bpmn:incoming>Flow_0cckbvs</bpmn:incoming>
       <bpmn:outgoing>Flow_0rmalz7</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:receiveTask id="Activity_1yhramr" name="Ausweisdokument erhalten" messageRef="Message_1bu76oc">
+    <bpmn:receiveTask id="Activity_1yhramr" name="Ausweisdokument erhalten" camunda:asyncBefore="true" messageRef="Message_1bu76oc">
       <bpmn:incoming>Flow_0rmalz7</bpmn:incoming>
       <bpmn:outgoing>Flow_0656pz2</bpmn:outgoing>
     </bpmn:receiveTask>

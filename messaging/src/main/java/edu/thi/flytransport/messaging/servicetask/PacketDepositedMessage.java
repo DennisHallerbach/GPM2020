@@ -8,10 +8,12 @@ public class PacketDepositedMessage implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		String deliveryProcessId = (String) execution.getVariable("deliveryProcessId");
+		String correlationId = (String) execution.getVariable("correlationId");
         RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
-		runtimeService.createMessageCorrelation("PacketPickedUpMessage")
-				.processInstanceVariableEquals("processId", deliveryProcessId).correlate();
+        runtimeService.createMessageCorrelation("PacketDepositedMessage")
+			.processInstanceVariableEquals("processId", correlationId)
+			.setVariable("correlationId", execution.getVariable("processId"))
+            .correlateWithResult();
 	}
 
 }
