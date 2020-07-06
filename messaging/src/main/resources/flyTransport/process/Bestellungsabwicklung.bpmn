@@ -48,6 +48,7 @@
       <bpmn:extensionElements>
         <camunda:in variables="all" />
         <camunda:out source="paymentSuccess" target="paymentSuccess" />
+        <camunda:out source="invoice" target="invoice" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0r829yg</bpmn:incoming>
       <bpmn:outgoing>Flow_1vnqi6b</bpmn:outgoing>

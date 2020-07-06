@@ -20,7 +20,7 @@ public class GetCredentialsTask implements JavaDelegate {
 		
         if(gotCredentials){
     		execution.setVariable("gotCredentials", gotCredentials);
-    		Order order = new Order(username,password,packetLength,packetWidth,packetHeight,packetWeight);
+    		Order order = new Order(username,packetLength,packetWidth,packetHeight,packetWeight);
     		execution.setVariable("order", order);
         } else {
     		execution.setVariable("gotCredentials", gotCredentials);        	
