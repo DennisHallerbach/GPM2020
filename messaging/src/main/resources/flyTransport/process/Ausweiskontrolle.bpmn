@@ -22,7 +22,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:extensionElements>
-        <camunda:executionListener expression="${expression.setVariableLocal(&#39;AgeOK&#39;,false)}" event="start" />
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;AgeOK&#39;,false)}" event="start" />
         <camunda:executionListener expression="${execution.setVariableLocal(&#39;IDCardCounter&#39;,1)}" event="start" />
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0ls92xp</bpmn:outgoing>
