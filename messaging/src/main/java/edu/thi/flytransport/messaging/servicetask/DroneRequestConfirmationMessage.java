@@ -10,7 +10,7 @@ public class DroneRequestConfirmationMessage implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 		String correlationId = (String) execution.getVariable("correlationId");
         RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
-        runtimeService.createMessageCorrelation("DroneRequestConfirmMessage")
+        runtimeService.createMessageCorrelation("DroneRequestConfirmationMessage")
 			.processInstanceVariableEquals("processId", correlationId)
 			.setVariable("correlationId", execution.getVariable("processId"))
             .correlateWithResult();
