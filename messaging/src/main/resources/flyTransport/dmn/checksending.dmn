@@ -23,7 +23,7 @@
       <output id="OutputClause_10lbdoe" label="ageApproval" name="ageApproval" typeRef="boolean" />
       <rule id="DecisionRule_1kpojbd">
         <inputEntry id="UnaryTests_1m3qpz7">
-          <text>true</text>
+          <text>false</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0xntfxz">
           <text>false</text>
@@ -40,7 +40,7 @@
       </rule>
       <rule id="DecisionRule_12fy5nf">
         <inputEntry id="UnaryTests_1vpczqn">
-          <text>true</text>
+          <text>false</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1pi8sbj">
           <text>true</text>
@@ -52,12 +52,12 @@
           <text>true</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0eq7lt6">
-          <text>false</text>
+          <text>true</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_07joh3h">
         <inputEntry id="UnaryTests_1f88vwd">
-          <text>false</text>
+          <text>true</text>
         </inputEntry>
         <inputEntry id="UnaryTests_11zh4h3">
           <text>false</text>
@@ -74,7 +74,7 @@
       </rule>
       <rule id="DecisionRule_1ya44lb">
         <inputEntry id="UnaryTests_07a9ryq">
-          <text>false</text>
+          <text>true</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1ffk3yo">
           <text>true</text>
@@ -118,20 +118,9 @@
           <text>"chemie"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_06xtd3e">
-          <text>"germany"</text>
+          <text>"germany","france"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1ewgz9g">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1qa5sjm">
-        <inputEntry id="UnaryTests_1lfukem">
-          <text>"chemie"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1m7o7td">
-          <text>"france"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_0n72fto">
           <text>true</text>
         </outputEntry>
       </rule>
@@ -140,20 +129,9 @@
           <text>"chemie"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1qg9u1a">
-          <text>"china"</text>
+          <text>"china","usa"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1r2iztd">
-          <text>false</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1p3nsu6">
-        <inputEntry id="UnaryTests_0t8lmtb">
-          <text>"chemie"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0b6aqy9">
-          <text>"usa"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1cz9yzv">
           <text>false</text>
         </outputEntry>
       </rule>
@@ -162,31 +140,9 @@
           <text>"sprengstoff"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1f61ff0">
-          <text>"germany"</text>
+          <text>"germany","france","china"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1wb8kku">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_0qr7mxl">
-        <inputEntry id="UnaryTests_1ej2y9s">
-          <text>"sprengstoff"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0y838zf">
-          <text>"france"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1h2hyz2">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_11eimwo">
-        <inputEntry id="UnaryTests_0xn724t">
-          <text>"sprengstoff"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0w2rdt8">
-          <text>"china"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1mtdthv">
           <text>true</text>
         </outputEntry>
       </rule>
@@ -195,7 +151,7 @@
           <text>"sprengstoff"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0kw2i3m">
-          <text>"usa</text>
+          <text>"usa"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0recevf">
           <text>false</text>
@@ -206,7 +162,7 @@
           <text>"treibstoff"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1muv4q9">
-          <text>"germany"</text>
+          <text>"germany","china"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0wjszng">
           <text>false</text>
@@ -217,31 +173,9 @@
           <text>"treibstoff"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0jgiubx">
-          <text>"france"</text>
+          <text>"france","usa"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0h15rto">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1gelba4">
-        <inputEntry id="UnaryTests_1uv9x94">
-          <text>"treibstoff"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0aa7rve">
-          <text>"china"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_0rkj3ye">
-          <text>false</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1c7tt5f">
-        <inputEntry id="UnaryTests_02rulfe">
-          <text>"treibstoff"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_02f0wgc">
-          <text>"usa"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1dhrwod">
           <text>true</text>
         </outputEntry>
       </rule>
@@ -250,20 +184,9 @@
           <text>"gift"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0w9p6ol">
-          <text>"germany"</text>
+          <text>"germany","france"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1dc9n0s">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1s8sb3p">
-        <inputEntry id="UnaryTests_1bxpy1r">
-          <text>"gift"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_10huhgg">
-          <text>"france"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_13h7evv">
           <text>true</text>
         </outputEntry>
       </rule>
@@ -272,20 +195,9 @@
           <text>"gift"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0twedel">
-          <text>"china"</text>
+          <text>"china","usa"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1w53zkz">
-          <text>false</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1j4tn6r">
-        <inputEntry id="UnaryTests_0afjzqq">
-          <text>"gift"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_111w6ve">
-          <text>"usa"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1f1iszz">
           <text>false</text>
         </outputEntry>
       </rule>
@@ -295,42 +207,9 @@
           <text>"notdangerous"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_16jpxb9">
-          <text>"germany"</text>
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_14wqizh">
-          <text>false</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_0hg4yvq">
-        <inputEntry id="UnaryTests_112tsw4">
-          <text>"notdangerous"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0wieyzk">
-          <text>"france"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_00bgqgr">
-          <text>false</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_0zvrybj">
-        <inputEntry id="UnaryTests_0hrvpeq">
-          <text>"notdangerous"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0l9cbft">
-          <text>"china"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1yenc1w">
-          <text>false</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_0qpe18v">
-        <inputEntry id="UnaryTests_1nwdlec">
-          <text>"notdangerous"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0sq1lty">
-          <text>"usa"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1h49gec">
           <text>false</text>
         </outputEntry>
       </rule>
@@ -357,10 +236,10 @@
       <output id="OutputClause_0d4gg2v" label="erwachsen" name="erwachsen" typeRef="boolean" />
       <rule id="DecisionRule_1u99wjl">
         <inputEntry id="UnaryTests_02xhyxh">
-          <text>&gt; 17</text>
+          <text>&gt;= 18</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1ixxfzd">
-          <text>"germany"</text>
+          <text>"germany","france","china"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0dvaz4i">
           <text>true</text>
@@ -371,48 +250,15 @@
           <text>&lt; 18</text>
         </inputEntry>
         <inputEntry id="UnaryTests_17clcto">
-          <text>"germany"</text>
+          <text>"germany","france","china"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_18x0uyi">
           <text>false</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_0000xkk">
-        <inputEntry id="UnaryTests_009vx60">
-          <text>&gt; 17</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0knph66">
-          <text>"france"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_0rxhvu0">
-          <text>true</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1rzbym2">
-        <inputEntry id="UnaryTests_0qhnign">
-          <text>&lt;18</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1586xov">
-          <text>"france"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_159hjya">
-          <text>false</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1nmcyqx">
-        <inputEntry id="UnaryTests_1tu5g6o">
-          <text>&lt;21</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0ixnquy">
-          <text>"usa"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1gsv1rc">
-          <text>false</text>
-        </outputEntry>
-      </rule>
       <rule id="DecisionRule_1dqjpy5">
         <inputEntry id="UnaryTests_013xih9">
-          <text>&gt;20</text>
+          <text>&gt;= 21</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0cady5s">
           <text>"usa"</text>
@@ -421,26 +267,15 @@
           <text>true</text>
         </outputEntry>
       </rule>
-      <rule id="DecisionRule_0gybvn7">
-        <inputEntry id="UnaryTests_10238w8">
-          <text>&lt;18</text>
+      <rule id="DecisionRule_1nmcyqx">
+        <inputEntry id="UnaryTests_1tu5g6o">
+          <text>&lt; 21</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_01i2rak">
-          <text>"china"</text>
+        <inputEntry id="UnaryTests_0ixnquy">
+          <text>"usa"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0kdjx85">
+        <outputEntry id="LiteralExpression_1gsv1rc">
           <text>false</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_0z15ss7">
-        <inputEntry id="UnaryTests_11fngp4">
-          <text>&gt;17</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1b52gl6">
-          <text>"china"</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_0lcbgba">
-          <text>true</text>
         </outputEntry>
       </rule>
     </decisionTable>
