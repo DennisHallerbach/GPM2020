@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_041suhj" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.0.0">
+  <bpmn:collaboration id="Collaboration_17zu040">
+    <bpmn:participant id="Participant_00ao0lq" name="Wetterabfrage" processRef="Wetterabfrage" />
+  </bpmn:collaboration>
+  <bpmn:process id="Wetterabfrage" name="Wetterabfrage" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_09nbj8e</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_09nbj8e" sourceRef="StartEvent_1" targetRef="Activity_0uebkz8" />
+    <bpmn:userTask id="Activity_0uebkz8" name="Wetterabfrage starten" camunda:assignee="kermit">
+      <bpmn:incoming>Flow_09nbj8e</bpmn:incoming>
+      <bpmn:outgoing>Flow_1vuwh6o</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1vuwh6o" sourceRef="Activity_0uebkz8" targetRef="Activity_1e08mzk" />
+    <bpmn:serviceTask id="Activity_1e08mzk" name="Wetter API abfragen" camunda:class="edu.thi.flytransport.messaging.servicetask.GetWeatherFromAPITask">
+      <bpmn:incoming>Flow_1vuwh6o</bpmn:incoming>
+      <bpmn:outgoing>Flow_1otjeej</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1otjeej" sourceRef="Activity_1e08mzk" targetRef="Activity_1099u19" />
+    <bpmn:endEvent id="Event_1y9sqi6">
+      <bpmn:incoming>Flow_18i340z</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_18i340z" sourceRef="Activity_1099u19" targetRef="Event_1y9sqi6" />
+    <bpmn:userTask id="Activity_1099u19" name="Wetterdaten anzeigen" camunda:assignee="kermit">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="weather" label="Wetter" type="string" defaultValue="${weather}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1otjeej</bpmn:incoming>
+      <bpmn:outgoing>Flow_18i340z</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_17zu040">
+      <bpmndi:BPMNShape id="Participant_00ao0lq_di" bpmnElement="Participant_00ao0lq" isHorizontal="true">
+        <dc:Bounds x="120" y="52" width="740" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_09nbj8e_di" bpmnElement="Flow_09nbj8e">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="270" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vuwh6o_di" bpmnElement="Flow_1vuwh6o">
+        <di:waypoint x="370" y="177" />
+        <di:waypoint x="430" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1otjeej_di" bpmnElement="Flow_1otjeej">
+        <di:waypoint x="530" y="177" />
+        <di:waypoint x="590" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18i340z_di" bpmnElement="Flow_18i340z">
+        <di:waypoint x="690" y="177" />
+        <di:waypoint x="752" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0tvvz6u_di" bpmnElement="Activity_0uebkz8">
+        <dc:Bounds x="270" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qbs24g_di" bpmnElement="Activity_1e08mzk">
+        <dc:Bounds x="430" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1y9sqi6_di" bpmnElement="Event_1y9sqi6">
+        <dc:Bounds x="752" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_173ez7w_di" bpmnElement="Activity_1099u19">
+        <dc:Bounds x="590" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
