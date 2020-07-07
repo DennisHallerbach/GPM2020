@@ -8,7 +8,7 @@ public class Drone implements Serializable {
 	private int id;
 	private int maxCarryWeight;
 	private boolean canFlyInBadWeatherConditions;
-	private long price;
+	private double price;
     
     public Drone() {
         this.id = 0;
@@ -16,7 +16,7 @@ public class Drone implements Serializable {
         this.canFlyInBadWeatherConditions = false;
     }
     
-	public Drone(int maxCarryWeight, boolean canFlyInBadWeatherConditions, long price) {
+	public Drone(int maxCarryWeight, boolean canFlyInBadWeatherConditions, double price) {
 		this.id = (int)Math.ceil(Math.random()*10000);
 		this.maxCarryWeight = maxCarryWeight;
 		this.canFlyInBadWeatherConditions = canFlyInBadWeatherConditions;
@@ -38,11 +38,11 @@ public class Drone implements Serializable {
 		this.canFlyInBadWeatherConditions = canFlyInBadWeatherConditions;
 	}
 
-	public long getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(long price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

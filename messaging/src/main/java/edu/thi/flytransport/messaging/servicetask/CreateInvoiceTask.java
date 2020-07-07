@@ -13,7 +13,7 @@ public class CreateInvoiceTask implements JavaDelegate {
 		Order order = (Order) execution.getVariable("order");
 		
 		Invoice invoice = new Invoice(order.getOrderid());
-		invoice.setSum((long) Math.ceil(Math.random()*10));
+		invoice.setSum((double) Math.ceil(Math.random()*10));
 		
 		execution.setVariable("invoice",invoice);
 	}
