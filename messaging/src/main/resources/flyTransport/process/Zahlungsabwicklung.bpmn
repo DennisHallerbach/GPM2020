@@ -36,12 +36,12 @@
       <bpmn:incoming>Flow_15g5n7k</bpmn:incoming>
       <bpmn:outgoing>Flow_07xj3nw</bpmn:outgoing>
     </bpmn:businessRuleTask>
-    <bpmn:scriptTask id="Activity_0sdl08t" name="Versuch erhöhen">
+    <bpmn:scriptTask id="Activity_0sdl08t" name="Versuch erhöhen" scriptFormat="JavaScript">
       <bpmn:incoming>Flow_07xj3nw</bpmn:incoming>
       <bpmn:outgoing>Flow_1bk5bdo</bpmn:outgoing>
-      <bpmn:script>counter = execution.getVariable("paymentCounter");
+      <bpmn:script>var counter = execution.getVariable("paymentCounter");
 counter++;
-execution.setVariabl("paymentCounter",counter);</bpmn:script>
+execution.setVariable("paymentCounter",counter);</bpmn:script>
     </bpmn:scriptTask>
     <bpmn:exclusiveGateway id="Gateway_1y8kqi9" name="Versuche größer max Versuche?">
       <bpmn:incoming>Flow_1bk5bdo</bpmn:incoming>
@@ -55,19 +55,19 @@ execution.setVariabl("paymentCounter",counter);</bpmn:script>
       <bpmn:incoming>Flow_0c68s09</bpmn:incoming>
       <bpmn:terminateEventDefinition id="TerminateEventDefinition_1rytx2g" />
     </bpmn:endEvent>
-    <bpmn:boundaryEvent id="Event_09f9k3d" name="Warte 5 Minuten" cancelActivity="false" attachedToRef="Activity_0agy9at">
+    <bpmn:boundaryEvent id="Event_09f9k3d" name="Alle 5 Minuten" cancelActivity="false" attachedToRef="Activity_0agy9at">
       <bpmn:outgoing>Flow_15g5n7k</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_1kx72s9">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5M</bpmn:timeDuration>
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R/PT5M</bpmn:timeCycle>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_01gboe8" name="nein" sourceRef="Gateway_1y8kqi9" targetRef="Event_1b1wzz4">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${paymentCounter &lt; maxTries}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${paymentCounter &lt;= maxTries}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_15g5n7k" sourceRef="Event_09f9k3d" targetRef="Activity_1tyyw05" />
     <bpmn:sequenceFlow id="Flow_1haegtb" sourceRef="Activity_0agy9at" targetRef="Event_193abke" />
     <bpmn:sequenceFlow id="Flow_0c68s09" name="ja" sourceRef="Gateway_1y8kqi9" targetRef="Event_06n4mmj">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${paymentCounter &gt;= maxTries}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${paymentCounter &gt; maxTries}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1bk5bdo" sourceRef="Activity_0sdl08t" targetRef="Gateway_1y8kqi9" />
     <bpmn:sequenceFlow id="Flow_07xj3nw" sourceRef="Activity_1tyyw05" targetRef="Activity_0sdl08t" />
@@ -170,7 +170,7 @@ execution.setVariabl("paymentCounter",counter);</bpmn:script>
       <bpmndi:BPMNShape id="Event_09f9k3d_di" bpmnElement="Event_09f9k3d">
         <dc:Bounds x="692" y="202" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="738" y="213" width="81" height="14" />
+          <dc:Bounds x="744" y="213" width="70" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0gc9buf_di" bpmnElement="Participant_1wlia3s" isHorizontal="true">
