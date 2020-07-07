@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="CheckFinancialStrength" name="CheckFinancialStrength" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
-  <decision id="Decision_0uyx1h9" name="Decision 1">
-    <extensionElements>
-      <biodi:bounds x="157" y="81" width="180" height="80" />
-    </extensionElements>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="CheckFinancialStrength_DRD" name="CheckFinancialStrength_DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.0.0">
+  <decision id="CheckFinancialStrength" name="CheckFinancialStrength">
     <decisionTable id="decisionTable_1">
-      <input id="input_1">
-        <inputExpression id="inputExpression_1" typeRef="string">
-          <text></text>
+      <input id="input_1" label="Alter">
+        <inputExpression id="inputExpression_1" typeRef="long">
+          <text>age</text>
         </inputExpression>
       </input>
-      <output id="output_1" typeRef="string" />
+      <output id="output_1" label="Maximale Zahlungsversuche" name="maxTries" typeRef="integer" />
+      <rule id="DecisionRule_1u3ccll">
+        <inputEntry id="UnaryTests_1y0zul8">
+          <text>&lt; 18</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_01gbthl">
+          <text>1</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ug77y8">
+        <inputEntry id="UnaryTests_0sevpv5">
+          <text>[18..25[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1gggnpb">
+          <text>2</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0qhvah4">
+        <inputEntry id="UnaryTests_16hlkor">
+          <text>&gt;= 25</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1q0tgel">
+          <text>3</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1xm2v98">
+      <dmndi:DMNShape id="DMNShape_1bar4q9" dmnElementRef="CheckFinancialStrength">
+        <dc:Bounds height="80" width="180" x="157" y="81" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>

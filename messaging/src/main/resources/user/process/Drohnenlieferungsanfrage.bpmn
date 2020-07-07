@@ -188,7 +188,7 @@
     </bpmn:sendTask>
     <bpmn:sequenceFlow id="Flow_0ok77vb" sourceRef="Event_1uw5ugy" targetRef="Activity_1k162xf" />
     <bpmn:sequenceFlow id="Flow_1bxzmxd" sourceRef="Activity_1k162xf" targetRef="Activity_0lda16a" />
-    <bpmn:intermediateCatchEvent id="Event_01rrct4" name="Anfrage bestätigt">
+    <bpmn:intermediateCatchEvent id="Event_01rrct4" name="Anfrage bestätigt" camunda:asyncBefore="true">
       <bpmn:incoming>Flow_1pgfhud</bpmn:incoming>
       <bpmn:outgoing>Flow_0tzfn8c</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0lvu23h" messageRef="Message_1btza9d" />
