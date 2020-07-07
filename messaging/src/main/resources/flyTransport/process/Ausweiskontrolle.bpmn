@@ -43,7 +43,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:endEvent id="Event_05dm52m" name="Alter ok">
       <bpmn:extensionElements>
-        <camunda:executionListener expression="${expression.setVariableLocal(&#39;AgeOK&#39;,true)}" event="start" />
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;AgeOK&#39;,true)}" event="start" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_11828hi</bpmn:incoming>
     </bpmn:endEvent>
