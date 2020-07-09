@@ -3,7 +3,7 @@
   <bpmn:collaboration id="Collaboration_1s1o2tw">
     <bpmn:participant id="Participant_0dbqb0n" name="User" processRef="PaketVersenden" />
   </bpmn:collaboration>
-  <bpmn:process id="PaketVersenden" name="Paket versenden" isExecutable="true">
+  <bpmn:process id="PaketVersenden" name="Paket versenden" isExecutable="true" camunda:candidateStarterGroups="normal User" camunda:candidateStarterUsers="fozzie">
     <bpmn:laneSet id="LaneSet_0j13hm0">
       <bpmn:lane id="Lane_164zmxt" name="Paket versenden">
         <bpmn:flowNodeRef>Event_14opkwo</bpmn:flowNodeRef>

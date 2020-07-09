@@ -50,9 +50,6 @@
     <bpmn:endEvent id="Event_16chrsz" name="Alter nicht ok">
       <bpmn:incoming>Flow_00fxqud</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:endEvent id="Event_1hg0pig" name="Zu viele Versuche">
-      <bpmn:incoming>Flow_1cm5ynb</bpmn:incoming>
-    </bpmn:endEvent>
     <bpmn:exclusiveGateway id="Gateway_13vwe47" name="Versuche kleiner 3?">
       <bpmn:incoming>Flow_1ya6gm8</bpmn:incoming>
       <bpmn:outgoing>Flow_1cm5ynb</bpmn:outgoing>
@@ -99,21 +96,17 @@ execution.setVariabl("IDCardCounter",counter);</bpmn:script>
     <bpmn:userTask id="Activity_1jrnwiu" name="Ausweis prüfen" camunda:assignee="kermit">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="IDCardCheck" label="IDCardCheck" type="boolean">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="AgeOK" label="AgeOK" type="boolean">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
+          <camunda:formField id="IDCardCheck" label="IDCardCheck" type="boolean" />
+          <camunda:formField id="AgeOK" label="AgeOK" type="boolean" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0656pz2</bpmn:incoming>
       <bpmn:outgoing>Flow_06akzh5</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:endEvent id="Event_1hg0pig" name="Zu viele Versuche">
+      <bpmn:incoming>Flow_1cm5ynb</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TerminateEventDefinition_17m2zsp" />
+    </bpmn:endEvent>
   </bpmn:process>
   <bpmn:message id="Message_1bu76oc" name="SendDocumentMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -236,12 +229,6 @@ execution.setVariabl("IDCardCounter",counter);</bpmn:script>
           <dc:Bounds x="1148" y="295" width="65" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0inj71n_di" bpmnElement="Event_1hg0pig">
-        <dc:Bounds x="1162" y="492" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1137" y="535" width="88" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_13vwe47_di" bpmnElement="Gateway_13vwe47" isMarkerVisible="true">
         <dc:Bounds x="895" y="485" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -253,6 +240,12 @@ execution.setVariabl("IDCardCounter",counter);</bpmn:script>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0ljrn98_di" bpmnElement="Activity_1jrnwiu">
         <dc:Bounds x="730" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1u5jo2w_di" bpmnElement="Event_1hg0pig">
+        <dc:Bounds x="1162" y="492" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1137" y="535" width="88" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_075iex5_di" bpmnElement="Event_075iex5">
         <dc:Bounds x="622" y="212" width="36" height="36" />
