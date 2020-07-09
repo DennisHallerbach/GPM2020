@@ -14,7 +14,6 @@ public class FindAvailableDroneTask implements JavaDelegate {
 		DroneProvider dP = new DroneProvider();
 		Drone drone = dP.findDrone(droneClazz);
 		if (drone != null) {
-			System.out.println(drone.getClazz().getName());
 			drone.setAvailable(false);
 			execution.setVariable("droneAvailable", true);
 			execution.setVariable("drone", drone);

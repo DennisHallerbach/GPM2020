@@ -18,6 +18,15 @@
       <bpmn:outgoing>Flow_0898ixi</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:userTask id="Activity_0za178y" name="Paket zur Abholung abstellen" camunda:assignee="fozzie">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="putPacketDownHint" label="Hinweis" type="string" defaultValue="Bitte stellen Sie das Paket ab und bestätigen dies.">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0898ixi</bpmn:incoming>
       <bpmn:outgoing>Flow_12om8xy</bpmn:outgoing>
     </bpmn:userTask>
@@ -31,10 +40,34 @@
       <bpmn:outgoing>Flow_08q7xbl</bpmn:outgoing>
     </bpmn:eventBasedGateway>
     <bpmn:userTask id="Activity_04350dt" name="Review Lieferung" camunda:assignee="fozzie">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="successHint" label="Lieferung erfolgreich!" type="string" defaultValue="Paket erfolgreich beim Empfänger abgestellt!">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1mzlhjp</bpmn:incoming>
       <bpmn:outgoing>Flow_0wnqolz</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="Activity_0lsvmqh" name="Review  Lieferungsabbruch" camunda:assignee="fozzie">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="failHint" label="Lieferung abgeborchen!" type="string" defaultValue="Paket konnte nicht zugestellt werden!" />
+          <camunda:formField id="errorMessage" label="Fehlernachricht" type="string" defaultValue="${errorMessage}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="messageFromFlyTransport" label="Nachricht von FlyTransport" type="string" defaultValue="${messageFromFlyTransport}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_08aerwm</bpmn:incoming>
       <bpmn:outgoing>Flow_059e0d9</bpmn:outgoing>
     </bpmn:userTask>
@@ -72,42 +105,42 @@
       <bpmndi:BPMNShape id="Participant_0zx42qj_di" bpmnElement="Participant_0zx42qj" isHorizontal="true">
         <dc:Bounds x="129" y="80" width="971" height="260" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_10kx3fo_di" bpmnElement="Flow_10kx3fo">
-        <di:waypoint x="560" y="267" />
-        <di:waypoint x="625" y="267" />
+      <bpmndi:BPMNEdge id="Flow_059e0d9_di" bpmnElement="Flow_059e0d9">
+        <di:waypoint x="980" y="267" />
+        <di:waypoint x="1022" y="267" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_12om8xy_di" bpmnElement="Flow_12om8xy">
-        <di:waypoint x="380" y="267" />
-        <di:waypoint x="460" y="267" />
+      <bpmndi:BPMNEdge id="Flow_08aerwm_di" bpmnElement="Flow_08aerwm">
+        <di:waypoint x="838" y="267" />
+        <di:waypoint x="880" y="267" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wnqolz_di" bpmnElement="Flow_0wnqolz">
+        <di:waypoint x="980" y="150" />
+        <di:waypoint x="1022" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mzlhjp_di" bpmnElement="Flow_1mzlhjp">
+        <di:waypoint x="748" y="150" />
+        <di:waypoint x="880" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0898ixi_di" bpmnElement="Flow_0898ixi">
+        <di:waypoint x="215" y="267" />
+        <di:waypoint x="280" y="267" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08q7xbl_di" bpmnElement="Flow_08q7xbl">
+        <di:waypoint x="675" y="267" />
+        <di:waypoint x="802" y="267" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0sycsot_di" bpmnElement="Flow_0sycsot">
         <di:waypoint x="650" y="242" />
         <di:waypoint x="650" y="150" />
         <di:waypoint x="712" y="150" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_08q7xbl_di" bpmnElement="Flow_08q7xbl">
-        <di:waypoint x="675" y="267" />
-        <di:waypoint x="802" y="267" />
+      <bpmndi:BPMNEdge id="Flow_12om8xy_di" bpmnElement="Flow_12om8xy">
+        <di:waypoint x="380" y="267" />
+        <di:waypoint x="460" y="267" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0898ixi_di" bpmnElement="Flow_0898ixi">
-        <di:waypoint x="215" y="267" />
-        <di:waypoint x="280" y="267" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1mzlhjp_di" bpmnElement="Flow_1mzlhjp">
-        <di:waypoint x="748" y="150" />
-        <di:waypoint x="880" y="150" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0wnqolz_di" bpmnElement="Flow_0wnqolz">
-        <di:waypoint x="980" y="150" />
-        <di:waypoint x="1022" y="150" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_08aerwm_di" bpmnElement="Flow_08aerwm">
-        <di:waypoint x="838" y="267" />
-        <di:waypoint x="880" y="267" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_059e0d9_di" bpmnElement="Flow_059e0d9">
-        <di:waypoint x="980" y="267" />
-        <di:waypoint x="1022" y="267" />
+      <bpmndi:BPMNEdge id="Flow_10kx3fo_di" bpmnElement="Flow_10kx3fo">
+        <di:waypoint x="560" y="267" />
+        <di:waypoint x="625" y="267" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="249" width="36" height="36" />
@@ -161,18 +194,18 @@
           <dc:Bounds x="465" y="393" width="90" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0k2lheu_di" bpmnElement="Flow_0k2lheu">
-        <di:waypoint x="820" y="460" />
-        <di:waypoint x="820" y="285" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="799" y="393" width="41" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1jz8qi9_di" bpmnElement="Flow_1jz8qi9">
         <di:waypoint x="730" y="460" />
         <di:waypoint x="730" y="168" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="687" y="393" width="85" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0k2lheu_di" bpmnElement="Flow_0k2lheu">
+        <di:waypoint x="820" y="460" />
+        <di:waypoint x="820" y="285" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="799" y="393" width="41" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

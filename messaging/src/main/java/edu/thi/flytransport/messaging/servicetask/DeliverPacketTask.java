@@ -4,22 +4,18 @@ import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
+import edu.thi.flytransport.messaging.beans.Drone;
+
 public class DeliverPacketTask implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		/*
-		 * TODO: define drone
 		Drone drone = (Drone) execution.getVariable("drone");
 		try {
-			drone.deliverPacket();
-		} catch (Exception e) {*/
-			System.out.println("Paket abstellen...");/*
-			System.out.println("Paket abstellen fehlgeschlagen...");
+			drone.deliverPacket("Empfänger");
+		} catch (Exception e) {
 			throw new BpmnError("410");
-			// Drone wieder verfügbar machen
 		}
-		*/
 	}
 
 }
