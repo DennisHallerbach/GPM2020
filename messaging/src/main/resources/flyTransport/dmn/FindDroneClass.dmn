@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="CheckDroneAvailbilityMain" name="CheckDroneAvailbilityMain" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.0.0">
+  <decision id="FindDroneClass" name="Drohnenklasse ermitteln">
+    <informationRequirement id="InformationRequirement_0potg3g">
+      <requiredDecision href="#Wetter" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_11ylr2p">
+      <requiredInput href="#InputData_1sk9ob5" />
+    </informationRequirement>
+    <decisionTable id="decisionTable_1" hitPolicy="COLLECT" aggregation="MIN">
+      <input id="input_1" label="Wetterkondition">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text>weatherCondition</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_102nh8t" label="Gewicht">
+        <inputExpression id="LiteralExpression_1uoxi4w" typeRef="long">
+          <text>packetWeight</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Drohnenklasse" typeRef="integer" />
+      <rule id="DecisionRule_0r7env6">
+        <inputEntry id="UnaryTests_0hq5kii">
+          <text>"bad","good"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1uze261">
+          <text>&lt;=20</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fm03vf">
+          <text>4</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1wjgwnh">
+        <inputEntry id="UnaryTests_0vn3w33">
+          <text>"good"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kwat15">
+          <text>&lt;=2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0kh2zqe">
+          <text>1</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1u6nrgl">
+        <inputEntry id="UnaryTests_0pzfbur">
+          <text>"good"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0diuj0g">
+          <text>&lt;=5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13vo7iz">
+          <text>2</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1sp308b">
+        <inputEntry id="UnaryTests_19a5mrt">
+          <text>"good"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nc5543">
+          <text>&lt;=10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0oycndn">
+          <text>3</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_189jsnw">
+        <inputEntry id="UnaryTests_1b1mhqn">
+          <text>"catastrophic"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0d70hhw">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0a330wj">
+          <text>100</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0k24s45">
+        <inputEntry id="UnaryTests_0wefm6t">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fl97rf">
+          <text>&gt;20</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04fwhe0">
+          <text>100</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_00m470a" name="Wetter" />
+  <decision id="Wetter" name="Wetterkondition">
+    <informationRequirement id="InformationRequirement_12whemk">
+      <requiredInput href="#InputData_00m470a" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1g2cmxe">
+      <input id="InputClause_1ihuig6" label="Wetter">
+        <inputExpression id="LiteralExpression_1hh85lr" typeRef="integer">
+          <text>weather</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0k183z0" label="Wetterkondition" name="weatherCondition" typeRef="string" />
+      <rule id="DecisionRule_0f64pub">
+        <inputEntry id="UnaryTests_0qwgro1">
+          <text>[300..301],500,[600..601],[700..760[,[800..900[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05vmis5">
+          <text>"good"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ab48vt">
+        <inputEntry id="UnaryTests_026u3xk">
+          <text>[200..201],[210..211],[230..231],[302..400[,501,[520..522[,[602..620]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0c7cwmu">
+          <text>"bad"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_14xulq8">
+        <inputEntry id="UnaryTests_0qwsq3d">
+          <text>[0..200[,]201..210[,]211..230[,]231..300[,[400..500[,]501..520[,]522..600[,]620..700[,[760..800[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0g6j5im">
+          <text>"catastrophic"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_1sk9ob5" name="Gewicht" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_15qy20c">
+      <dmndi:DMNShape id="DMNShape_0xqar0h" dmnElementRef="FindDroneClass">
+        <dc:Bounds height="80" width="180" x="280" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0bngye6" dmnElementRef="InputData_00m470a">
+        <dc:Bounds height="45" width="125" x="187" y="367" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0efjtvp" dmnElementRef="InformationRequirement_12whemk">
+        <di:waypoint x="250" y="367" />
+        <di:waypoint x="250" y="340" />
+        <di:waypoint x="250" y="320" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_100gwll" dmnElementRef="Wetter">
+        <dc:Bounds height="80" width="180" x="160" y="240" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1bftwm5" dmnElementRef="InformationRequirement_0potg3g">
+        <di:waypoint x="250" y="240" />
+        <di:waypoint x="340" y="180" />
+        <di:waypoint x="340" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0zidgij" dmnElementRef="InputData_1sk9ob5">
+        <dc:Bounds height="45" width="125" x="447" y="227" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0fp14dr" dmnElementRef="InformationRequirement_11ylr2p">
+        <di:waypoint x="510" y="227" />
+        <di:waypoint x="400" y="180" />
+        <di:waypoint x="400" y="160" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

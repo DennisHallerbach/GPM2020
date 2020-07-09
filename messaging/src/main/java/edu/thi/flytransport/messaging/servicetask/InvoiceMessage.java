@@ -15,8 +15,8 @@ public class InvoiceMessage implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 		Invoice invoice = (Invoice) execution.getVariable("invoice");
 		Map<String, Object> data = new HashMap<String,Object>();
-		data.put("invoiceNr", invoice.getInvoiceId());
-		data.put("invoiceAmount", invoice.getSum());
+		data.put("invoiceNr", String.format("%s", invoice.getInvoiceId()));
+		data.put("invoiceAmount", String.format("%s €", invoice.getSum()));
 		data.put("invoiceDescription", invoice.getDescription());
 		
 		String correlationId = (String) execution.getVariable("correlationId");

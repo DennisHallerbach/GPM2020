@@ -28,7 +28,7 @@ public class Invoice implements Serializable {
 	}
 	
 	public String getDescription() {
-		return String.format("Invoice for order %s. Total sum: %s",orderId,sum);
+		return String.format("Rechnung für Bestellung %s", orderId, sum);
 	}
 
 	public int getOrderId() {

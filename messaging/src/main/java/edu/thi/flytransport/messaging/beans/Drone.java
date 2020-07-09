@@ -6,51 +6,31 @@ public class Drone implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
-	private int maxCarryWeight;
-	private boolean canFlyInBadWeatherConditions;
-	private double price;
+	private DroneClass clazz;
 	private boolean available;
-    
-    public Drone() {
-        this.id = 0;
-        this.maxCarryWeight = 0;
-        this.canFlyInBadWeatherConditions = false;
-		this.available = true;
+
+	public Drone() {
+        this.id = -1;
+        this.clazz = null;
+        this.setAvailable(false);
     }
     
-	public Drone(int maxCarryWeight, boolean canFlyInBadWeatherConditions, double price) {
+	public Drone(DroneClass clazz) {
 		this.id = (int)Math.ceil(Math.random()*10000);
-		this.maxCarryWeight = maxCarryWeight;
-		this.canFlyInBadWeatherConditions = canFlyInBadWeatherConditions;
-		this.available = true;
-	}
-
-	public int getMaxCarryWeight() {
-		return maxCarryWeight;
-	}
-
-	public void setMaxCarryWeight(int maxCarryWeight) {
-		this.maxCarryWeight = maxCarryWeight;
-	}
-
-	public boolean isCanFlyInBadWeatherConditions() {
-		return canFlyInBadWeatherConditions;
-	}
-
-	public void setCanFlyInBadWeatherConditions(boolean canFlyInBadWeatherConditions) {
-		this.canFlyInBadWeatherConditions = canFlyInBadWeatherConditions;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
+		this.clazz = clazz;
+		this.setAvailable(true);
 	}
 
 	public int getId() {
 		return id;
+	}
+    
+    public DroneClass getClazz() {
+		return clazz;
+	}
+
+	public void setClazz(DroneClass clazz) {
+		this.clazz = clazz;
 	}
 
 	public boolean isAvailable() {
