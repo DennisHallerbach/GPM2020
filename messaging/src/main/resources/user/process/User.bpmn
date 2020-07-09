@@ -28,6 +28,7 @@
         <camunda:in variables="all" />
         <camunda:out source="droneDeliveryRequestSuccess" target="droneDeliveryRequestSuccess" />
         <camunda:out source="correlationId" target="correlationId" />
+        <camunda:out source="orderInfo" target="orderInfo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0vf4kzs</bpmn:incoming>
       <bpmn:outgoing>Flow_1i3q8hz</bpmn:outgoing>

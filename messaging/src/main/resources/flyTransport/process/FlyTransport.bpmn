@@ -14,9 +14,10 @@
         <bpmn:flowNodeRef>Event_1xbd4tp</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1ai2mb1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0eyalo4</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_10swxa3</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1tko6i4</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_02wi2fo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_10swxa3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_13nrsa8</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0wm77bu" name="Drohnenservice">
         <bpmn:flowNodeRef>Activity_04bokfh</bpmn:flowNodeRef>
@@ -35,6 +36,7 @@
         <camunda:in variables="all" />
         <camunda:out source="initialVerificationSuccess" target="initialVerificationSuccess" />
         <camunda:out source="order" target="order" />
+        <camunda:out source="drone" target="drone" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0djog53</bpmn:incoming>
       <bpmn:outgoing>Flow_1ca67mv</bpmn:outgoing>
@@ -69,10 +71,7 @@
       <bpmn:outgoing>Flow_1aqy0g5</bpmn:outgoing>
       <bpmn:outgoing>Flow_0wj7rw4</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="Event_10swxa3" name="Bestellung fehlgeschlagen">
-      <bpmn:incoming>Flow_1aqy0g5</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_1aqy0g5" name="nein" sourceRef="Gateway_0eyalo4" targetRef="Event_10swxa3">
+    <bpmn:sequenceFlow id="Flow_1aqy0g5" name="nein" sourceRef="Gateway_0eyalo4" targetRef="Activity_13nrsa8">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!orderProcessingSuccess}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0wj7rw4" name="ja" sourceRef="Gateway_0eyalo4" targetRef="Activity_04bokfh">
@@ -105,6 +104,14 @@
       <bpmn:incoming>Flow_1ybo6a0</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0djog53" sourceRef="Event_1qwk7uy" targetRef="Activity_0ipw1zp" />
+    <bpmn:endEvent id="Event_10swxa3" name="Bestellung fehlgeschlagen">
+      <bpmn:incoming>Flow_0y15c3g</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_13nrsa8" name="Drohnenreservicerung canceln" camunda:class="edu.thi.flytransport.messaging.servicetask.CancelDroneTask">
+      <bpmn:incoming>Flow_1aqy0g5</bpmn:incoming>
+      <bpmn:outgoing>Flow_0y15c3g</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0y15c3g" sourceRef="Activity_13nrsa8" targetRef="Event_10swxa3" />
   </bpmn:process>
   <bpmn:message id="Message_1y3avbq" name="OrderMessage" />
   <bpmn:message id="Message_0gx6ltl" name="NewDroneRequestMessage" />
@@ -114,13 +121,13 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0fyyx5f">
       <bpmndi:BPMNShape id="Participant_09s9mkf_di" bpmnElement="FlytransportId" isHorizontal="true">
-        <dc:Bounds x="140" y="80" width="1200" height="350" />
+        <dc:Bounds x="140" y="80" width="1200" height="410" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_0wm77bu_di" bpmnElement="Lane_0wm77bu" isHorizontal="true">
         <dc:Bounds x="170" y="80" width="1170" height="150" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_0va5gvb_di" bpmnElement="Lane_0va5gvb" isHorizontal="true">
-        <dc:Bounds x="170" y="230" width="1170" height="200" />
+        <dc:Bounds x="170" y="230" width="1170" height="260" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0djog53_di" bpmnElement="Flow_0djog53">
         <di:waypoint x="348" y="300" />
@@ -155,10 +162,10 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1aqy0g5_di" bpmnElement="Flow_1aqy0g5">
         <di:waypoint x="940" y="325" />
-        <di:waypoint x="940" y="360" />
-        <di:waypoint x="1032" y="360" />
+        <di:waypoint x="940" y="410" />
+        <di:waypoint x="1000" y="410" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="945" y="340" width="21" height="14" />
+          <dc:Bounds x="949" y="390" width="21" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0c4icvy_di" bpmnElement="Flow_0c4icvy">
@@ -183,6 +190,10 @@
       <bpmndi:BPMNEdge id="Flow_1ca67mv_di" bpmnElement="Flow_1ca67mv">
         <di:waypoint x="500" y="300" />
         <di:waypoint x="555" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0y15c3g_di" bpmnElement="Flow_0y15c3g">
+        <di:waypoint x="1100" y="410" />
+        <di:waypoint x="1152" y="410" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1qwk7uy_di" bpmnElement="Event_1qwk7uy">
         <dc:Bounds x="312" y="282" width="36" height="36" />
@@ -214,12 +225,6 @@
           <dc:Bounds x="975" y="286.5" width="64" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_10swxa3_di" bpmnElement="Event_10swxa3">
-        <dc:Bounds x="1032" y="342" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1013" y="385" width="74" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0tnaihl_di" bpmnElement="Activity_04bokfh">
         <dc:Bounds x="1000" y="120" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -241,14 +246,23 @@
           <dc:Bounds x="1087" y="286" width="65" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_10swxa3_di" bpmnElement="Event_10swxa3">
+        <dc:Bounds x="1152" y="392" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1133" y="435" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_13nrsa8_di" bpmnElement="Activity_13nrsa8">
+        <dc:Bounds x="1000" y="370" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_1arsypx_di" bpmnElement="Participant_0av7dpj" isHorizontal="true">
-        <dc:Bounds x="140" y="490" width="1200" height="60" />
+        <dc:Bounds x="140" y="550" width="1200" height="60" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_092prmt_di" bpmnElement="Flow_092prmt">
-        <di:waypoint x="330" y="490" />
+        <di:waypoint x="330" y="550" />
         <di:waypoint x="330" y="318" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="310" y="433" width="39" height="14" />
+          <dc:Bounds x="310" y="513" width="39" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

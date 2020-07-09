@@ -13,6 +13,15 @@
       <bpmn:outgoing>Flow_1jjwm3u</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:userTask id="Activity_0ws8wey" name="Bestellung bestätigen" camunda:assignee="fozzie">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="orderInfo" label="Bestellinformation" type="string" defaultValue="${orderInfo}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1jjwm3u</bpmn:incoming>
       <bpmn:outgoing>Flow_1y2f5kb</bpmn:outgoing>
     </bpmn:userTask>
@@ -26,6 +35,25 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_1eq3yl9" messageRef="Message_0lvd9xf" />
     </bpmn:intermediateCatchEvent>
     <bpmn:userTask id="Activity_1vuwf1g" name="Rechnung zahlen" camunda:assignee="fozzie">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="invoiceNr" label="Rechnungsnummer" type="string" defaultValue="${invoiceNr}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="invoiceAmount" label="Rechnungssumme" type="string" defaultValue="${invoiceAmount}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="invoiceDescription" label="Beschreibung" type="string" defaultValue="${invoiceDescription}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1gatf52</bpmn:incoming>
       <bpmn:outgoing>Flow_0c7dj6u</bpmn:outgoing>
     </bpmn:userTask>
