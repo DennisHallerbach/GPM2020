@@ -7,7 +7,13 @@ public class FlyPacketTask implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO: define message
+		/*
+		 * TODO: define drone
+		Drone drone = (Drone) execution.getVariable("drone");
+		destination = execution.getVariable("destination");
+		drone.flyPacket(destination);
+		*/
+		System.out.println("Paket fliegen...");
 	}
 
 }

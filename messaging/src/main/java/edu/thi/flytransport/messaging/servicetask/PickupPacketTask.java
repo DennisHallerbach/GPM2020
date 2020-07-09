@@ -8,8 +8,17 @@ public class PickupPacketTask implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO: define message
-		throw new BpmnError("499");
+		/*
+		 * TODO: define drone
+		Drone drone = (Drone) execution.getVariable("drone");
+		try {
+			drone.pickupPacket();
+		} catch (Exception e) {*/
+			System.out.println("Paket abholen...");/*
+			System.out.println("Paket abholen fehlgeschlagen...");
+			throw new BpmnError("400");
+		}
+		*/
 	}
 
 }
