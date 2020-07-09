@@ -21,7 +21,7 @@
           <text>false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_04t21tm">
-          <text>"hazardousMaterial"</text>
+          <text>"dangerous"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0xyzffj">
@@ -32,7 +32,7 @@
           <text>true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0gbdtyv">
-          <text>"hazardousMaterial"</text>
+          <text>"both"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1fmu49o">
