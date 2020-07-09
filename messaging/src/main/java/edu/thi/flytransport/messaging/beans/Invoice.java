@@ -7,7 +7,7 @@ public class Invoice implements Serializable {
 	
 	private int orderId;
 	private int invoiceId;
-	private long sum;
+	private double sum;
 	
 	public Invoice() {
 		this.orderId = 0;
@@ -21,14 +21,14 @@ public class Invoice implements Serializable {
 		this.sum = 0;
 	}
 	
-	public Invoice (int orderId, long sum) {
+	public Invoice (int orderId, double sum) {
 		this.orderId = orderId;
 		this.invoiceId = (int)Math.ceil(Math.random()*10000);
 		this.sum = sum;		
 	}
 	
 	public String getDescription() {
-		return String.format("Invoice for order %s. Total sum: %s",orderId,sum);
+		return String.format("Rechnung für Bestellung %s", orderId, sum);
 	}
 
 	public int getOrderId() {
@@ -39,12 +39,12 @@ public class Invoice implements Serializable {
 		this.orderId = orderId;
 	}
 
-	public long getSum() {
+	public double getSum() {
 		return sum;
 	}
 
-	public void setSum(long sum) {
-		this.sum = sum;
+	public void setSum(double d) {
+		this.sum = d;
 	}
 
 	public int getInvoiceId() {
