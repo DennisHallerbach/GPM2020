@@ -1,4 +1,7 @@
 package edu.thi.flytransport.messaging.servicetask;
+/**
+ * Author: Julian Bauer
+ */
 
 import java.net.URI;
 import java.net.http.HttpClient;

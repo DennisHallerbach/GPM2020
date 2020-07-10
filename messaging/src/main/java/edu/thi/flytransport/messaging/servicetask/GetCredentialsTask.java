@@ -1,4 +1,7 @@
 package edu.thi.flytransport.messaging.servicetask;
+/**
+ * Author: Dennis Hallerbach
+ */
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -10,7 +13,6 @@ public class GetCredentialsTask implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {		
 		String username = (String) execution.getVariable("username");
-		String password = (String) execution.getVariable("password");
 		Long packetLength = (Long) execution.getVariable("packetLength");
 		Long packetWidth = (Long) execution.getVariable("packetWidth");
 		Long packetHeight = (Long) execution.getVariable("packetHeight");

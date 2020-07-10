@@ -6,7 +6,6 @@
   <bpmn:process id="Paketanmelden" isExecutable="true" camunda:isStartableInTasklist="false">
     <bpmn:laneSet id="LaneSet_0bp671s">
       <bpmn:lane id="Lane_1xgqvum" name="User">
-        <bpmn:flowNodeRef>Event_0h6mphj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0s108dt</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_07zlk5g</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_06sy9or</bpmn:flowNodeRef>
@@ -14,14 +13,9 @@
         <bpmn:flowNodeRef>Gateway_09gqm0j</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_09hs7vi</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0v4rypv</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0h6mphj</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:startEvent id="Event_0h6mphj">
-      <bpmn:extensionElements>
-        <camunda:executionListener expression="${execution.setVariableLocal(&#39;defaultCase&#39;,false)}" event="start" />
-      </bpmn:extensionElements>
-      <bpmn:outgoing>Flow_169mytx</bpmn:outgoing>
-    </bpmn:startEvent>
     <bpmn:subProcess id="Activity_0s108dt">
       <bpmn:incoming>Flow_169mytx</bpmn:incoming>
       <bpmn:outgoing>Flow_0o1hoby</bpmn:outgoing>
@@ -114,7 +108,7 @@
             <camunda:formField id="dangerousDefault" label="Gefahrgut" type="enum">
               <camunda:value id="notdangerous" name="Nicht gefäjrlich" />
             </camunda:formField>
-            <camunda:formField id="completionCondition" label="Standartfall?" type="boolean" defaultValue="false" />
+            <camunda:formField id="completionCondition" label="Standardfall?" type="boolean" defaultValue="false" />
           </camunda:formData>
           <camunda:executionListener expression="${execution.setVariable(&#39;defaultCase&#39;,completionCondition)}" event="end" />
         </bpmn:extensionElements>
@@ -260,6 +254,12 @@
     <bpmn:sequenceFlow id="Flow_0o1hoby" sourceRef="Activity_0s108dt" targetRef="Gateway_07zlk5g" />
     <bpmn:sequenceFlow id="Flow_0zf1fsz" sourceRef="Event_0v4rypv" targetRef="Gateway_07zlk5g" />
     <bpmn:sequenceFlow id="Flow_169mytx" sourceRef="Event_0h6mphj" targetRef="Activity_0s108dt" />
+    <bpmn:startEvent id="Event_0h6mphj">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;defaultCase&#39;,false)}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_169mytx</bpmn:outgoing>
+    </bpmn:startEvent>
   </bpmn:process>
   <bpmn:escalation id="Escalation_16kcoi2" name="CancelTP" escalationCode="CancelTP" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -271,7 +271,7 @@
         <dc:Bounds x="190" y="60" width="1240" height="830" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_169mytx_di" bpmnElement="Flow_169mytx">
-        <di:waypoint x="328" y="490" />
+        <di:waypoint x="298" y="490" />
         <di:waypoint x="340" y="490" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0zf1fsz_di" bpmnElement="Flow_0zf1fsz">
@@ -311,11 +311,15 @@
         <di:waypoint x="1352" y="410" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_0h6mphj_di" bpmnElement="Event_0h6mphj">
-        <dc:Bounds x="292" y="472" width="36" height="36" />
+        <dc:Bounds x="262" y="472" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0s108dt_di" bpmnElement="Activity_0s108dt" isExpanded="true">
         <dc:Bounds x="340" y="110" width="640" height="750" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0wwf3dq_di" bpmnElement="Flow_0wwf3dq">
+        <di:waypoint x="760" y="400" />
+        <di:waypoint x="815" y="400" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1s2cb1l_di" bpmnElement="Flow_1s2cb1l">
         <di:waypoint x="800" y="270" />
         <di:waypoint x="840" y="270" />
@@ -356,10 +360,6 @@
         <di:waypoint x="495" y="400" />
         <di:waypoint x="520" y="400" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0wwf3dq_di" bpmnElement="Flow_0wwf3dq">
-        <di:waypoint x="760" y="400" />
-        <di:waypoint x="815" y="400" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="362" y="382" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -374,12 +374,6 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="903" y="425" width="55" height="53" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1td2xx5_di" bpmnElement="Activity_1vq7a4r">
-        <dc:Bounds x="520" y="360" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1fhd72t_di" bpmnElement="Activity_1afaszc">
-        <dc:Bounds x="660" y="360" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1vrx9to_di" bpmnElement="Activity_0u0ca86" isExpanded="true">
         <dc:Bounds x="465" y="600" width="350" height="200" />
@@ -433,8 +427,14 @@
       <bpmndi:BPMNShape id="Activity_0x7ehrd_di" bpmnElement="Activity_13f1j07">
         <dc:Bounds x="530" y="230" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1td2xx5_di" bpmnElement="Activity_1vq7a4r">
+        <dc:Bounds x="520" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_18ob08t_di" bpmnElement="Activity_1schhu8">
         <dc:Bounds x="610" y="470" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1fhd72t_di" bpmnElement="Activity_1afaszc">
+        <dc:Bounds x="660" y="360" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_07zlk5g_di" bpmnElement="Gateway_07zlk5g" isMarkerVisible="true">
         <dc:Bounds x="1045" y="385" width="50" height="50" />

@@ -1,5 +1,9 @@
 package edu.thi.flytransport.messaging.beans;
 
+/**
+ * Author: Dennis Hallerbach
+ */
+
 import java.io.Serializable;
 
 public class Order implements Serializable {

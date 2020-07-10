@@ -36,8 +36,8 @@
         <bpmn:flowNodeRef>Event_0kfret7</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_10hohze</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1iqsxpn</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0nwjvnn</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1iqsxpn</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:intermediateCatchEvent id="Event_146aezr" name="Lieferung nicht genehmigt" camunda:asyncBefore="true">
@@ -155,14 +155,6 @@
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0agt8jl</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:callActivity id="Activity_1iqsxpn" name="Paket anmelden" calledElement="Paketanmelden">
-      <bpmn:extensionElements>
-        <camunda:in variables="all" />
-        <camunda:out variables="all" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0agt8jl</bpmn:incoming>
-      <bpmn:outgoing>Flow_1fzfrd3</bpmn:outgoing>
-    </bpmn:callActivity>
     <bpmn:sequenceFlow id="Flow_0tzfn8c" sourceRef="Event_01rrct4" targetRef="Event_18p8stw" />
     <bpmn:sequenceFlow id="Flow_1bxzmxd" sourceRef="Activity_1k162xf" targetRef="Activity_0lda16a" />
     <bpmn:sequenceFlow id="Flow_0ok77vb" sourceRef="Event_1uw5ugy" targetRef="Activity_1k162xf" />
@@ -183,13 +175,21 @@
     <bpmn:sequenceFlow id="Flow_0aa9q13" sourceRef="Event_146aezr" targetRef="Event_10hohze" />
     <bpmn:sequenceFlow id="Flow_1j1tagh" sourceRef="Event_1x2pmwj" targetRef="Gateway_1w6kp5y" />
     <bpmn:sequenceFlow id="Flow_1w8izwf" sourceRef="Event_0kdnjiu" targetRef="Gateway_1w6kp5y" />
-    <bpmn:boundaryEvent id="Event_0nwjvnn" attachedToRef="Activity_1k162xf">
+    <bpmn:boundaryEvent id="Event_0nwjvnn" name="nach 4 Minuten" attachedToRef="Activity_1k162xf">
       <bpmn:outgoing>Flow_12hc9pr</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_1ug5w35">
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT4M</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_12hc9pr" sourceRef="Event_0nwjvnn" targetRef="Gateway_1stzn8o" />
+    <bpmn:callActivity id="Activity_1iqsxpn" name="Paket anmelden" calledElement="Paketanmelden">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0agt8jl</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fzfrd3</bpmn:outgoing>
+    </bpmn:callActivity>
   </bpmn:process>
   <bpmn:message id="Message_1391a04" name="RequestDocumentMessage" />
   <bpmn:message id="Message_160827l" name="DeliveryNotApprovedMessage" />
@@ -201,6 +201,11 @@
       <bpmndi:BPMNShape id="Lane_08zcqmn_di" bpmnElement="Lane_08zcqmn" isHorizontal="true">
         <dc:Bounds x="190" y="100" width="1588" height="770" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_12hc9pr_di" bpmnElement="Flow_12hc9pr">
+        <di:waypoint x="1500" y="748" />
+        <di:waypoint x="690" y="750" />
+        <di:waypoint x="690" y="315" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1w8izwf_di" bpmnElement="Flow_1w8izwf">
         <di:waypoint x="1110" y="432" />
         <di:waypoint x="1110" y="392" />
@@ -276,9 +281,7 @@
         <di:waypoint x="585" y="177" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1fzfrd3_di" bpmnElement="Flow_1fzfrd3">
-        <di:waypoint x="460" y="190" />
-        <di:waypoint x="498" y="190" />
-        <di:waypoint x="498" y="177" />
+        <di:waypoint x="460" y="177" />
         <di:waypoint x="535" y="177" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1osy90w_di" bpmnElement="Flow_1osy90w">
@@ -296,12 +299,6 @@
       <bpmndi:BPMNEdge id="Flow_0tzfn8c_di" bpmnElement="Flow_0tzfn8c">
         <di:waypoint x="1588" y="610" />
         <di:waypoint x="1662" y="610" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_12hc9pr_di" bpmnElement="Flow_12hc9pr">
-        <di:waypoint x="1500" y="748" />
-        <di:waypoint x="1500" y="768" />
-        <di:waypoint x="690" y="768" />
-        <di:waypoint x="690" y="315" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_146aezr_di" bpmnElement="Event_146aezr">
         <dc:Bounds x="882" y="272" width="36" height="36" />
@@ -382,10 +379,13 @@
         <dc:Bounds x="232" y="159" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_15sp08b_di" bpmnElement="Activity_1iqsxpn">
-        <dc:Bounds x="360" y="150" width="100" height="80" />
+        <dc:Bounds x="360" y="137" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_13p0l6f_di" bpmnElement="Event_0nwjvnn">
         <dc:Bounds x="1482" y="712" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1462" y="755" width="76" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0f0wdnj_di" bpmnElement="Participant_0k9ap5z" isHorizontal="true">
         <dc:Bounds x="215" y="990" width="1563" height="60" />
