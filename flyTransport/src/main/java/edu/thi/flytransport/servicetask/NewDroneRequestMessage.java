@@ -22,6 +22,7 @@ public class NewDroneRequestMessage implements JavaDelegate {
 		Long packetHeight = (Long) execution.getVariable("packetHeight");
 		Long packetWeight = (Long) execution.getVariable("packetWeight");
 		Long age = (Long) execution.getVariable("age");
+		Long userAge = (Long) execution.getVariable("userAge");
 		String dangerous = (String) execution.getVariable("dangerous");
 		String destination = (String) execution.getVariable("destination");
 		Map<String, Object> data = new HashMap<String,Object>();
@@ -32,6 +33,7 @@ public class NewDroneRequestMessage implements JavaDelegate {
 		data.put("packetHeight", packetHeight);
 		data.put("packetWeight", packetWeight);
 		data.put("age", age);
+		data.put("userAge", userAge);
 		data.put("dangerous", dangerous);
 		data.put("destination",destination);
 		

@@ -5,9 +5,9 @@
       <requiredInput href="#InputData_0huurll" />
     </informationRequirement>
     <decisionTable id="decisionTable_1">
-      <input id="input_1" label="Alter">
+      <input id="input_1" label="Alter des Users">
         <inputExpression id="inputExpression_1" typeRef="long">
-          <text>age</text>
+          <text>userAge</text>
         </inputExpression>
       </input>
       <output id="output_1" label="Maximale Zahlungsversuche" name="maxTries" typeRef="integer" />

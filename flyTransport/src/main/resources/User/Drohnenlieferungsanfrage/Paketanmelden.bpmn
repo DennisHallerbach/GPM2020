@@ -97,7 +97,7 @@
                 <camunda:constraint name="readonly" />
               </camunda:validation>
             </camunda:formField>
-            <camunda:formField id="ageDefault" label="Alter" type="long" defaultValue="20">
+            <camunda:formField id="ageDefault" label="Alter des Empfängers" type="long" defaultValue="20">
               <camunda:validation>
                 <camunda:constraint name="readonly" />
               </camunda:validation>
@@ -124,6 +124,11 @@
               </camunda:validation>
             </camunda:formField>
             <camunda:formField id="password" label="Password" type="string">
+              <camunda:validation>
+                <camunda:constraint name="required" />
+              </camunda:validation>
+            </camunda:formField>
+            <camunda:formField id="userAge" label="Useralter" type="long">
               <camunda:validation>
                 <camunda:constraint name="required" />
               </camunda:validation>
@@ -159,7 +164,7 @@
       <bpmn:userTask id="Activity_1schhu8" name="Sonderanfragen eingeben" camunda:assignee="fozzie">
         <bpmn:extensionElements>
           <camunda:formData>
-            <camunda:formField id="age" label="Alter" type="long">
+            <camunda:formField id="age" label="Alter des Empfängers" type="long">
               <camunda:validation>
                 <camunda:constraint name="required" />
               </camunda:validation>
@@ -310,9 +315,6 @@
         <di:waypoint x="1315" y="410" />
         <di:waypoint x="1352" y="410" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_0h6mphj_di" bpmnElement="Event_0h6mphj">
-        <dc:Bounds x="262" y="472" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0s108dt_di" bpmnElement="Activity_0s108dt" isExpanded="true">
         <dc:Bounds x="340" y="110" width="640" height="750" />
       </bpmndi:BPMNShape>
@@ -456,6 +458,9 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1329" y="435" width="83" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0h6mphj_di" bpmnElement="Event_0h6mphj">
+        <dc:Bounds x="262" y="472" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1wcdqi1_di" bpmnElement="Event_0v4rypv">
         <dc:Bounds x="962" y="600" width="36" height="36" />
