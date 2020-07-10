@@ -5,7 +5,7 @@
     <bpmn:participant id="Participant_0av7dpj" name="User" />
     <bpmn:messageFlow id="Flow_092prmt" name="Anfrage" sourceRef="Participant_0av7dpj" targetRef="Event_1qwk7uy" />
   </bpmn:collaboration>
-  <bpmn:process id="Flytransport" name="Flytransport" isExecutable="true">
+  <bpmn:process id="Flytransport" name="Flytransport" isExecutable="true" camunda:isStartableInTasklist="false">
     <bpmn:laneSet id="LaneSet_15ev0l5">
       <bpmn:lane id="Lane_0va5gvb" name="Portal">
         <bpmn:flowNodeRef>Event_1qwk7uy</bpmn:flowNodeRef>
@@ -129,6 +129,10 @@
       <bpmndi:BPMNShape id="Lane_0va5gvb_di" bpmnElement="Lane_0va5gvb" isHorizontal="true">
         <dc:Bounds x="170" y="230" width="1170" height="260" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0y15c3g_di" bpmnElement="Flow_0y15c3g">
+        <di:waypoint x="1100" y="410" />
+        <di:waypoint x="1152" y="410" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0djog53_di" bpmnElement="Flow_0djog53">
         <di:waypoint x="348" y="300" />
         <di:waypoint x="400" y="300" />
@@ -190,10 +194,6 @@
       <bpmndi:BPMNEdge id="Flow_1ca67mv_di" bpmnElement="Flow_1ca67mv">
         <di:waypoint x="500" y="300" />
         <di:waypoint x="555" y="300" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0y15c3g_di" bpmnElement="Flow_0y15c3g">
-        <di:waypoint x="1100" y="410" />
-        <di:waypoint x="1152" y="410" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1qwk7uy_di" bpmnElement="Event_1qwk7uy">
         <dc:Bounds x="312" y="282" width="36" height="36" />

@@ -6,7 +6,20 @@
     <bpmn:messageFlow id="Flow_024xczc" name="Dokumentanforderung" sourceRef="Activity_0c4bpd9" targetRef="Participant_01olm2w" />
     <bpmn:messageFlow id="Flow_0ww7zdz" name="Dokument" sourceRef="Participant_01olm2w" targetRef="Activity_15x9jt4" />
   </bpmn:collaboration>
-  <bpmn:process id="Zulassungskontrolle" name="Zulassungskontrolle" isExecutable="true">
+  <bpmn:process id="Zulassungskontrolle" name="Zulassungskontrolle" isExecutable="true" camunda:isStartableInTasklist="false">
+    <bpmn:laneSet id="LaneSet_17lhvwt">
+      <bpmn:lane id="Lane_1rjeml1" name="Logistikabteilung">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0c4bpd9</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_15x9jt4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0k3eo9o</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_00x70vt</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0mb61g4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1645m3f</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0enozmb</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1fle62u</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:extensionElements>
         <camunda:executionListener expression="${execution.setVariableLocal(&#39;DocumentOK&#39;,false)}" event="start" />
@@ -14,6 +27,9 @@
       <bpmn:outgoing>Flow_0ux04sk</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sendTask id="Activity_0c4bpd9" name="Zulassungsdokument anfordern" camunda:class="edu.thi.flytransport.messaging.servicetask.RequestDocumentMessage">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariableLocal(&#39;text&#39;,&#34;Bitte Gefahrgutdokument anfügen&#34;)}" event="start" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0ux04sk</bpmn:incoming>
       <bpmn:outgoing>Flow_0jrpn74</bpmn:outgoing>
     </bpmn:sendTask>
@@ -41,10 +57,10 @@
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_13puvyz</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:boundaryEvent id="Event_1fle62u" name="Warte 10 Minuten" attachedToRef="Activity_15x9jt4">
+    <bpmn:boundaryEvent id="Event_1fle62u" name="Warte 5 Minuten" attachedToRef="Activity_15x9jt4">
       <bpmn:outgoing>Flow_1ripp8f</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_0ik5340">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10M</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5M</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_0jrpn74" sourceRef="Activity_0c4bpd9" targetRef="Activity_15x9jt4" />
@@ -70,7 +86,10 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0tn7g90">
       <bpmndi:BPMNShape id="Participant_1shj889_di" bpmnElement="Participant_1shj889" isHorizontal="true">
-        <dc:Bounds x="129" y="85" width="851" height="325" />
+        <dc:Bounds x="129" y="85" width="851" height="445" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1rjeml1_di" bpmnElement="Lane_1rjeml1" isHorizontal="true">
+        <dc:Bounds x="159" y="85" width="821" height="445" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0ux04sk_di" bpmnElement="Flow_0ux04sk">
         <di:waypoint x="215" y="177" />
@@ -148,24 +167,24 @@
       <bpmndi:BPMNShape id="Event_1fle62u_di" bpmnElement="Event_1fle62u">
         <dc:Bounds x="522" y="199" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="566" y="230" width="87" height="14" />
+          <dc:Bounds x="570" y="230" width="81" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0vaqbej_di" bpmnElement="Participant_01olm2w" isHorizontal="true">
-        <dc:Bounds x="129" y="530" width="851" height="60" />
+        <dc:Bounds x="129" y="630" width="851" height="60" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_024xczc_di" bpmnElement="Flow_024xczc">
         <di:waypoint x="330" y="217" />
-        <di:waypoint x="330" y="530" />
+        <di:waypoint x="330" y="630" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="286" y="463" width="88" height="27" />
+          <dc:Bounds x="286" y="546" width="88" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0ww7zdz_di" bpmnElement="Flow_0ww7zdz">
-        <di:waypoint x="490" y="530" />
+        <di:waypoint x="490" y="630" />
         <di:waypoint x="490" y="217" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="464" y="470" width="51" height="14" />
+          <dc:Bounds x="464" y="553" width="51" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

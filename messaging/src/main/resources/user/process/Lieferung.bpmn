@@ -10,7 +10,21 @@
     <bpmn:messageFlow id="Flow_1jz8qi9" name="Lieferbestätigung" sourceRef="Participant_0kxut83" targetRef="Event_0my1nfx" />
     <bpmn:messageFlow id="Flow_0k2lheu" name="Abbruch" sourceRef="Participant_0kxut83" targetRef="Event_0ctyzeu" />
   </bpmn:collaboration>
-  <bpmn:process id="Lieferung" name="Lieferung" isExecutable="true">
+  <bpmn:process id="Lieferung" name="Lieferung" isExecutable="true" camunda:isStartableInTasklist="false">
+    <bpmn:laneSet id="LaneSet_0tuwrh3">
+      <bpmn:lane id="Lane_0qakk2q" name="User">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0za178y</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1rc99jd</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_07zzp1e</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_04350dt</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0lsvmqh</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1iuq3in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_09nmtfo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0ctyzeu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0my1nfx</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:extensionElements>
         <camunda:executionListener expression="${execution.setVariableLocal(&#39;droneDeliverySuccess&#39;,false)}" event="start" />
@@ -103,7 +117,10 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_15u87a7">
       <bpmndi:BPMNShape id="Participant_0zx42qj_di" bpmnElement="Participant_0zx42qj" isHorizontal="true">
-        <dc:Bounds x="129" y="80" width="971" height="260" />
+        <dc:Bounds x="129" y="60" width="971" height="280" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0qakk2q_di" bpmnElement="Lane_0qakk2q" isHorizontal="true">
+        <dc:Bounds x="159" y="60" width="941" height="280" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_059e0d9_di" bpmnElement="Flow_059e0d9">
         <di:waypoint x="980" y="267" />

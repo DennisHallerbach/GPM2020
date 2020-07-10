@@ -1,5 +1,9 @@
 package edu.thi.flytransport.messaging;
 
+/**
+ * Author: Julian Bauer
+ */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,8 +13,8 @@ import edu.thi.flytransport.messaging.beans.DroneClass;
 
 public class DroneProvider {
 	
-private static List<Drone> drones;
-private static HashMap<Integer,DroneClass> droneClasses;
+	private static List<Drone> drones;
+	private static HashMap<Integer,DroneClass> droneClasses;
 	
 	public DroneProvider() {
 	}

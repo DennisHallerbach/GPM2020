@@ -1,4 +1,7 @@
 package edu.thi.flytransport.messaging.servicetask;
+/**
+ * Author: Julian Bauer
+ */
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;

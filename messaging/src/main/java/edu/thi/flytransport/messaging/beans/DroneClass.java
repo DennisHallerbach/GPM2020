@@ -1,5 +1,9 @@
 package edu.thi.flytransport.messaging.beans;
 
+/**
+ * Author: Julian Bauer
+ */
+
 import java.io.Serializable;
 
 public class DroneClass implements Serializable {

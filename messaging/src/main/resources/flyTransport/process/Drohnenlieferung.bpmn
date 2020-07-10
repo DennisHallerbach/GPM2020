@@ -10,7 +10,21 @@
     <bpmn:messageFlow id="Flow_16jufpx" name="Abstellbestätigung" sourceRef="Participant_127z7ad" targetRef="Activity_1lu305l" />
     <bpmn:messageFlow id="Flow_1sg8hmi" name="Abbruch" sourceRef="Event_1l5a7ry" targetRef="Participant_127z7ad" />
   </bpmn:collaboration>
-  <bpmn:process id="Drohnenlieferung" name="Drohnenlieferung" isExecutable="true">
+  <bpmn:process id="Drohnenlieferung" name="Drohnenlieferung" isExecutable="true" camunda:isStartableInTasklist="false">
+    <bpmn:laneSet id="LaneSet_0t2s5c4">
+      <bpmn:lane id="Lane_15gpjen" name="Logistikabteilung">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1lu305l</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_0wi8yrq</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0aucdqi</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1l5a7ry</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1si3hci</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_00k2490</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0hwryeh</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_140kj52</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1nee9zx</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:extensionElements>
         <camunda:executionListener expression="${execution.setVariableLocal(&#39;droneDeliverySuccess&#39;,false)}" event="start" />
@@ -155,7 +169,10 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_17j8prz">
       <bpmndi:BPMNShape id="Participant_0rf6q68_di" bpmnElement="Participant_0rf6q68" isHorizontal="true">
-        <dc:Bounds x="179" y="260" width="1711" height="580" />
+        <dc:Bounds x="179" y="260" width="1711" height="700" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_15gpjen_di" bpmnElement="Lane_15gpjen" isHorizontal="true">
+        <dc:Bounds x="209" y="260" width="1681" height="700" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1twsfj2_di" bpmnElement="Flow_1twsfj2">
         <di:waypoint x="590" y="450" />

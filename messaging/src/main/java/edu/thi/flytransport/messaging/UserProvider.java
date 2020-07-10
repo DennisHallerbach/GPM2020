@@ -1,5 +1,9 @@
 package edu.thi.flytransport.messaging;
 
+/**
+ * Author: Julian Bauer
+ */
+
 import java.util.HashMap;
 
 public class UserProvider {

@@ -1,4 +1,7 @@
 package edu.thi.flytransport.messaging.servicetask;
+/**
+ * Author: Dennis Hallerbach
+ */
 
 import java.util.HashMap;
 import java.util.Map;
