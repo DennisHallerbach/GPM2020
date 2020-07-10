@@ -54,3 +54,4 @@
                                  - WetterAPi, Drohnenklasse ermitteln und Verfügbare Drohne ermitteln von Julian Bauer
 - Bestellungsabwicklungsmodelle im Allgemeinen gemeinsam, Zahlungsabwicklungsprozess von Julian Bauer
 - Drohnenlieferung Transaktionsteilprozess von Julian Bauer
+- Zum Testen wird Java 11 und camunda 7.13 benötigt, da sonst die WetterApi bzw die DMN modelle nicht funktionieren
