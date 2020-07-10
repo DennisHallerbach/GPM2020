@@ -46,3 +46,11 @@
 - Mehrfachinstanzmakierung !!!!!!!!
 - Geschäftsregeln Wetter Zahlung und Verfügbarkeit
 - ProcessID Korrelation -> Businesskey Korrelation
+
+## Meeting vom 10.07
+
+- User-Prozessmodelle im Allgmeinen gemeinsam, Adhoc-Teilprozess (Paketanmelden) von Dennis Hallerbach
+- Prozesse in Initialüberprüfung - Anmeldedaten, Lieferung überprüfen(DMN) und Liefergenehmigung von Dennis Hallerbach
+                                 - WetterAPi, Drohnenklasse ermitteln und Verfügbare Drohne ermitteln von Julian Bauer
+- Bestellungsabwicklungsmodelle im Allgemeinen gemeinsam, Zahlungsabwicklungsprozess von Julian Bauer
+- Drohnenlieferung Transaktionsteilprozess von Julian Bauer
