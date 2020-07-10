@@ -97,7 +97,7 @@
                 <camunda:constraint name="readonly" />
               </camunda:validation>
             </camunda:formField>
-            <camunda:formField id="ageDefault" label="Alter des Empfängers" type="long" defaultValue="20">
+            <camunda:formField id="ageDefault" label="Altersbeschränkung des zu versendenden Gegenstandes" type="long" defaultValue="20">
               <camunda:validation>
                 <camunda:constraint name="readonly" />
               </camunda:validation>
@@ -164,7 +164,7 @@
       <bpmn:userTask id="Activity_1schhu8" name="Sonderanfragen eingeben" camunda:assignee="fozzie">
         <bpmn:extensionElements>
           <camunda:formData>
-            <camunda:formField id="age" label="Alter des Empfängers" type="long">
+            <camunda:formField id="age" label="Altersbeschränkung des zu versendenden Gegenstandes" type="long">
               <camunda:validation>
                 <camunda:constraint name="required" />
               </camunda:validation>
